@@ -1,0 +1,41 @@
+<!-- 
+
+
+<br><br><br>
+
+  <h1><font color="green"><u>Admin created</u></font></h1>
+
+   <table>
+       <tr>
+         <td>  Name :  </td>
+         <td>  <%= @user.name %> </td>
+       </tr>
+
+       <tr>
+         <td> E-mail</td>
+         <td> <%= @user.email %></td>
+       </tr>
+
+       </table>
+
+   
+    
+<br>
+
+<br>
+<%= link_to 'Home' , show_path(@user) %> | 
+<%= link_to 'Generate Article' ,  new_user_article_path(@user) %> |  
+<%= link_to "Read user's Articles" , index_path(@user) %> |
+<%= link_to "[Logout]", logout_path, method: :delete %>
+
+
+
+</center>
+
+
+
+
+
+
+
+ -->

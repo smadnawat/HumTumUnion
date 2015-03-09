@@ -1,0 +1,26 @@
+
+<center>
+<h2>Likes</h1>
+ 
+<table bordercolor=brown , border=1>
+  <tr >
+    <th> User Id </th>
+    <th> User Name </th>
+  </tr>
+ 
+  <% @likes.each do |like| %>
+    <tr>
+      <td><%= like.user_id %></td>
+      <td><%= find_user(like.user_id).name %> </td>   
+    </tr>
+  <% end %>
+</table>
+<br>
+
+
+ 
+<br>
+<br>
+<%= link_to ' Back ', :back %><br>
+
+ </center>

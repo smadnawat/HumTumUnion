@@ -1,0 +1,33 @@
+<!-- <br>
+Hello <font color="green"><b><%= session[:name] %></b></font>
+
+<br><br><br>
+<center>
+<h3>List of all users </h3>
+ 
+<table bordercolor=brown border=1>
+  <tr >
+    <th> User Id</th>
+    <th> Name </th>
+    <th> E-Mail </th>
+    <th> Delete </th>
+   
+  </tr>
+ 
+  <% @users.each do |user| %>
+    <tr>
+      <td><%= user.id %></td>
+      <td><%= user.name %></td>
+      <td><%= user.email %> </td>
+      <td><%= link_to ' Delete '%></td>
+      
+    </tr>
+  <% end %>
+</table>
+<br>
+<br>
+<%= link_to 'home' , show_path(@user) %>
+<br>
+<br>
+ <%= link_to "Log out", logout_path, method: :delete %>
+ </center> -->

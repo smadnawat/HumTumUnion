@@ -1,0 +1,16 @@
+ 
+    <% if comment.Commenter.to_i == current_user.id %>
+    <font color="green"><%= find_user(comment.Commenter).name %> : </font>
+     <font color="333300"><%= comment.comment %></font>
+    <%= link_to 'X', [comment.article, comment],
+               method: :delete,
+               data: { confirm: 'Are you sure?' } , :class => "links"%>
+
+
+     <% else %>
+     <font color="3366FF"><%= find_user(comment.Commenter).name %> : </font>
+      <font color="666600"><%= comment.comment %></font>
+
+    <% end %>
+  <br>
+ 

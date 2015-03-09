@@ -1,0 +1,58 @@
+
+<center>
+<table  bordercolor=brown, border=1>
+  <tr><td>
+  Post by : <font color="3366FF"><b><%= @article.user.name %></b></font><br>
+  Event Title :<font color="brown"><b><%= @article.title %></b></font><br>
+  About Event :<font color="blue"><b><%= @article.text %></b></font><br>
+  Date of Event:<font color="blue"><b><%= @article.date %></b></font><br>
+    <%= image_tag @article.image , :size => "200x300" %>
+  </p>
+
+ </td></tr>
+  <tr><td>
+  
+  <%= form_for :like , url: article_likes_path(@article) do |f| %>
+  <%= f.hidden_field :user_id , :value => current_user.id , :readonly =>true %>
+   <%= f.submit "Like" , :class => "button" %>
+   <b><font color="660033"><%= pluralize(@likes.count, "like") %></font> </b>
+   <%= link_to 'Show' , article_likes_path(@article), :class => "links" %>
+  <% end %>
+
+
+
+ </td></tr>
+  <tr><td>
+
+
+  <h3><font color="660033"> <%= pluralize(@comments.count, "Comment") %></font></h3>
+
+  <%= render @article.comments %>
+
+ </td></tr>
+  <tr><td>
+    
+     <%= form_for([@article, @article.comments.build]) do |f| %>
+     <b><%#= current_user.name %>Leave your comment</b> 
+     <%= f.hidden_field :Commenter , :value => current_user.id , :readonly =>true %><br>
+    <%#= current_user method is defines in app/controllers/application_controller.rb %>
+    <%#= f.label :comment %>
+     <%= f.text_area :comment %><br>
+  
+    <%= f.submit "comment" ,:class => "button"  %>
+
+    <% end %>
+
+
+  </td></tr>
+</table>
+
+
+
+
+<br>
+
+<br>
+<%= link_to 'Home' , show_path(@user) ,:class => "links" %> | 
+<%= link_to "All Events" , index_path(@user) ,:class => "links"  %> 
+ </center>

@@ -1,0 +1,47 @@
+
+
+<center>
+<h2> My Events</h1>
+ 
+<table bordercolor=brown, border=1>
+  <tr >
+    <th> User Id </th>
+    <th> Event Id </th>
+    <th> Event Title </th>
+    <th> About Event </th>
+    <th> Date of Event </th>
+   
+    <th> show </th>
+    <th> update  </th>
+    <th> Delete  </th>
+  </tr>
+ 
+  <% @article.each do |article| %>
+    <tr>
+      <td><%= article.user_id %></td>
+      <td><%= article.id %> </td>
+      <td><%= article.title %></td>
+      <td><%= article.text %></td>
+      <td><%= article.date %></td> 
+        
+      <td> <%= link_to ' Show ', user_article_path(@user,article) ,:class => "links"%></td>
+      <td> <center><%= link_to ' Edit ', edit_user_article_path(@user,article),:class => "links" %> </center></td>
+      <td><%= link_to ' Delete ', user_article_path(@user,article),:class => "links", method: :delete,
+              data: { confirm: 'Are you sure?' } %>
+
+      </td>
+
+    </tr>
+  <% end %>
+</table>
+<br>
+
+
+ 
+<br>
+<br>
+<%= link_to 'Home' , show_path(@user),:class => "links"%>
+<br>
+<%= link_to 'Add Event' ,  new_user_article_path(@user),:class => "links"%>
+<br>
+ </center>

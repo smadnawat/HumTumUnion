@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Signup</title>
+  <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
+  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+  <%= csrf_meta_tags %>
+
+  <style type="text/css">
+  .button
+  {
+    background-color: blue ;
+    border-radius:25px ;
+    color: white;
+
+  }
+ .button:hover
+ {
+   background-color: white ;
+    color: blue;
+ }
+
+ .links
+ {
+ 	color :red; 	
+ 	text-decoration: none;
+ }
+ .links:hover
+ {
+ 	color: #9900CC;
+ }
+
+ .footer
+ {
+  background-color:green;
+  width:100%;
+  color:white;
+  text-align:center;
+  height:50%;
+  margin-top:3%;
+ }
+
+</style>
+
+
+</head>
+
+<body>
+
+<% if session[:id].present? %>
+<br><br>Hello <font color="green" ><b> <%= current_user.name %>
+</b></font><br><br>
+
+<center><br><br> <b><%= current_user.email %></b>
+<% else %>
+
+<% end %>
+
+<%= yield %>
+
+
+<% if session[:id].present? %>
+<br><div style="text-align : center;"><%= link_to "Log out", logout_path, method: :delete %></div>
+<% end %>
+
+
+   <p class="notice"><%= notice %></p>
+       <p class="alert"><%= alert %></p>
+
+</body>
+</html>

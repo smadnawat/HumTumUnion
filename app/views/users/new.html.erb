@@ -1,0 +1,89 @@
+
+<center>
+<marquee bgcolor="green" behavior="alternate">
+<h1><font color = "white" > Welcome </font></h1></marquee>
+
+<table border="1" bordercolor="green" width=50% style="margin-top:2%">
+ <tr>
+    <td>
+    <center>
+      <h1><font color="green"><u>Login</u></font></h1>
+
+        <%= form_for :session, url: login_path do |f| %>
+         <p> <font color="red">
+         <%= flash[:warning] || flash[:notice] || flash[:alert] %>
+         </font></p>
+         <p>
+            <%= f.label :email %><br>
+            <%= f.email_field :email %>
+         </p>
+         <p>
+            <%= f.label :password %><br>
+            <%= f.password_field :password %>
+         </p>
+        <!--  <p>
+         <%#= f.select :role, options_for_select([["Select User Type","o"],["Event Manager", "Admin"], ["Audience", "User"]]) %>
+         </p> -->
+         <p>
+            <%= f.submit "Log in" ,:class => "button"%>
+         </p>
+        <% end %>
+    </center>
+    </td>
+  </tr>
+  <tr>
+   <td>
+    <center>
+     <h1><font color="green"><u>SignUp</u></font></h1>
+
+     <%= form_for :user , url: users_path do |f| %>
+       <p>
+        <%= render 'shared/error_messages' %>
+  
+       </p>
+       <table>
+       <tr>
+         <td>  <%= f.label :name %> </td>
+         <td>  <%= f.text_field :name %> </td>
+       </tr>
+
+       <tr>
+         <td> <%= f.label :email %></td>
+         <td> <%= f.email_field :email %></td>
+       </tr>
+
+       <tr>
+         <td> <%= f.label :password %></td>
+         <td> <%= f.password_field :password %> </td>
+       </tr>
+
+       <tr>
+         <td> <%= f.label :password, "Confirmation" %></td>
+         <td> <%= f.password_field :password_confirmation %></td>
+       </tr>
+       <tr>
+        <td> <%= f.label :date , "Date of Birth" %></td>
+        <!-- <td> <%= f.text_field :dob, :class => "datepicker" %> </td> -->
+        <td><%= f.date_select :dob , start_year: 1970 , end_year:  Time.now.year - 18 %> </td>
+
+       </tr>
+       <tr>
+         <td> <%= f.label :role, "Role" %></td>
+         <td> <%= f.select :role, options_for_select([["Event Manager" ,"Admin"],["Audience", "User"]]) %></td>
+       </tr>
+    
+       <tr>
+         <td> <%= f.submit "Create my account" ,:class => "button" %></td>
+       </tr>
+       </table>
+      <% end %>    
+   </center>
+   </td>
+  </tr>
+ 
+</table>
+
+</center>
+
+<div class="footer">jai.rajput@mobiloittegroup.com</div>
+
