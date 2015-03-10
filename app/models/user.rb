@@ -8,11 +8,17 @@ class User < ActiveRecord::Base
   #validates_presence_of :name, :email
   validates_uniqueness_of :email
   validates_format_of :name, :with => /\A[^0-9`!@#\$%\^&*+_=]+\z/
-  #
+  
+
+  validates :dob, :presence => true
+  validate  :dob_is_over18
+
+  def birthday_is_date
+    errors.add(:dob, "should be over 18 years") if ( dob > time.now-18 rescue ArgumentError) == ArgumentError)
+  end
   # add any other characters you'd like to disallow inside the [ brackets ]
   # metacharacters [, \, ^, $, ., |, ?, *, +, (, and ) need to be escaped with a \
-
-
+ 
   # validates_confirmation_of :password
 
   has_secure_password

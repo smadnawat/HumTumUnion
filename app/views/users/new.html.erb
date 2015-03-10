@@ -63,8 +63,9 @@
        </tr>
        <tr>
         <td> <%= f.label :date , "Date of Birth" %></td>
-        <!-- <td> <%= f.text_field :dob, :class => "datepicker" %> </td> -->
-        <td><%= f.date_select :dob , start_year: 1970 , end_year:  Time.now.year - 18 %> </td>
+        <!-- <td><%#= f.date_select :dob , start_year: 1970 , end_year:  Time.now.year - 18 %> </td> -->
+        <td> <%= f.text_field :dob ,:size => '20%',:readonly => 'true' ,:class =>'datepicker' %></td>
+        <!-- https://github.com/Nerian/bootstrap-datepicker-rails -->
 
        </tr>
        <tr>

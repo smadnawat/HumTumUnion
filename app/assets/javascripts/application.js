@@ -15,9 +15,13 @@
 //= require turbolinks
 //= require_tree .
 //= require jquery-ui
+//= require bootstrap-datepicker
 
-	
-$(function() {
-// code.
-$('.datepicker').datepicker({dateFormat: 'dd-mm-yy'});
-});
+//= require bootstrap-datepicker/core
+//= require bootstrap-datepicker/locales/bootstrap-datepicker.es.js
+//= require bootstrap-datepicker/locales/bootstrap-datepicker.fr.js
+
+
+ $(document).ready(function(){
+    $('.datepicker').datepicker();
+  });

@@ -5,7 +5,6 @@ gem 'rails', '4.0.0'
 
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3'
-
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.0'
 
@@ -35,6 +34,8 @@ end
 # Use ActiveModel has_secure_password
  gem 'bcrypt-ruby', '~> 3.0.0'
 
+
+
 # Use unicorn as the app server
 # gem 'unicorn'
 gem 'carrierwave'
@@ -46,6 +47,8 @@ gem 'validates_email_format_of'
 
 # for date picker ==>  jai
 gem 'jquery-ui-rails'
+
+gem 'bootstrap-datepicker-rails'
 
 # gem 'protected_attributes'
 # Use Capistrano for deployment

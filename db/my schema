@@ -1,0 +1,10 @@
+CREATE TABLE "schema_migrations" ("version" varchar(255) NOT NULL);
+CREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version");
+CREATE TABLE sqlite_sequence(name,seq);
+CREATE TABLE "articles" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "title" varchar(255), "text" varchar(255), "user_id" integer, "created_at" datetime, "updated_at" datetime, "image" varchar(255), "date" date);
+CREATE INDEX "index_articles_on_user_id" ON "articles" ("user_id");
+CREATE TABLE "comments" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "comment" varchar(255), "article_id" integer, "created_at" datetime, "updated_at" datetime, "Commenter" varchar(255));
+CREATE INDEX "index_comments_on_article_id" ON "comments" ("article_id");
+CREATE TABLE "likes" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "user_id" integer, "article_id" integer, "created_at" datetime, "updated_at" datetime);
+CREATE INDEX "index_likes_on_article_id" ON "likes" ("article_id");
+CREATE TABLE "users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255), "email" varchar(255), "created_at" datetime, "updated_at" datetime, "password_digest" varchar(255), "role" varchar(255), "dob" date);
