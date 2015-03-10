@@ -23,5 +23,6 @@
 
 
  $(document).ready(function(){
-    $('.datepicker').datepicker({dateFormat: 'dd-mm-yy'});
+    $('.datepicker').datepicker({dateFormat: 'yy-dd-mm' ,endDate: '+0d',
+        autoclose: true});
   });

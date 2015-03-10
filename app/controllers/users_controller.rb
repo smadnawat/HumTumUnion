@@ -5,27 +5,28 @@ class UsersController < ApplicationController
   end
 
   def create
-           @user = User.new(user_params)
-           age = params[:user][:dob]
+   @user = User.new(user_params)
+   age = params[:user][:dob]
           
     #p "***************#{age}******#{Date.today}***************"
-          if age != ''
-           @check_age = (age.to_date + 18.years) < Date.today
-           if @check_age
-
-              if @user.save       
-                  redirect_to @user
-              else
-                  render "new"
-              end
-            else
-              @user.errors.add(:dob, "should be over 18 years")
-              render  new_user_path
-            end  
-            else
-              @user.errors.add(:dob, "Required")
-              render  new_user_path
-            end 
+      if age != ''  
+        @check_age = (age.to_date + 18.years) < Date.today
+        
+         if @check_age
+ 
+           if @user.save       
+             redirect_to @user
+           else
+             render "new"
+           end
+         else
+           @user.errors.add(:dob, "should be over 18 years old")
+           render "new"
+         end 
+      else  
+        @user.errors.add(:dob, "Date of birth can not blank")
+        render "new"
+      end
   end
 
   def show
