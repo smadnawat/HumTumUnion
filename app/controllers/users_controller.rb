@@ -6,11 +6,22 @@ class UsersController < ApplicationController
 
   def create
            @user = User.new(user_params)
-           if @user.save       
-              redirect_to @user
-           else
+           age = params[:user][:dob]
+          
+#p "***************#{age}******#{Date.today}***************"
+
+           @check_age = (age.to_date + 18.years) < Date.today
+           if @check_age
+
+              if @user.save       
+                  redirect_to @user
+              else
+                  render "new"
+              end
+            else
+              @user.errors.add(:dob, "should be over 18 years")
               render "new"
-           end
+            end   
   end
 
   def show
