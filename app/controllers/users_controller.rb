@@ -16,7 +16,7 @@ class UsersController < ApplicationController
               if @user.save       
                   redirect_to @user
               else
-                  render  new_user_path
+                  render "new"
               end
             else
               @user.errors.add(:dob, "should be over 18 years")
