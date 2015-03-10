@@ -10,12 +10,12 @@ class User < ActiveRecord::Base
   validates_format_of :name, :with => /\A[^0-9`!@#\$%\^&*+_=]+\z/
   
 
-  validates :dob, :presence => true
-  validate  :dob_is_over18
+  # validates :dob, :presence => true
+  # validate  :dob_is_over18
 
-  def birthday_is_date
-    errors.add(:dob, "should be over 18 years") if ( dob > time.now-18 rescue ArgumentError) == ArgumentError)
-  end
+  # def birthday_is_date
+  #   errors.add(:dob, "should be over 18 years") if ( dob > time.now-18 rescue ArgumentError) == ArgumentError)
+  # end
   # add any other characters you'd like to disallow inside the [ brackets ]
   # metacharacters [, \, ^, $, ., |, ?, *, +, (, and ) need to be escaped with a \
  
