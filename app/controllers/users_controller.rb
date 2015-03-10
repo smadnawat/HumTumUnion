@@ -8,8 +8,8 @@ class UsersController < ApplicationController
            @user = User.new(user_params)
            age = params[:user][:dob]
           
-#p "***************#{age}******#{Date.today}***************"
-
+    #p "***************#{age}******#{Date.today}***************"
+          if age != ''
            @check_age = (age.to_date + 18.years) < Date.today
            if @check_age
 
@@ -20,8 +20,12 @@ class UsersController < ApplicationController
               end
             else
               @user.errors.add(:dob, "should be over 18 years")
-              render "new"
-            end   
+              render  new_user_path
+            end  
+            else
+              @user.errors.add(:dob, "Required")
+              render  new_user_path
+            end 
   end
 
   def show
