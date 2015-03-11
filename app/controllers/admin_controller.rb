@@ -7,7 +7,7 @@ class AdminController < ApplicationController
 
   def index
    @user = User.find(params[:id])
-   @users = User.where('id != ?',@user.id)
+   @users = User.where('id != ?',current_user.id)
   end
 
   def destroy
