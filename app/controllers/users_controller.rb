@@ -11,7 +11,8 @@ class UsersController < ApplicationController
      @check_age = (age.to_date + 18.years) < Date.today
      if @check_age
        if @user.save       
-         redirect_to @user
+         session[:id] = @user.id  
+         redirect_to show_path(@user)
        else
          render "new"
        end
