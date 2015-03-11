@@ -1,12 +1,9 @@
 class CommentsController < ApplicationController
   before_action :require_login
   def new
-
   end
 
   def create
-    #logger.info "=======================#{params}"
-    #@user= User.find(params[:user_id])
     @article = Article.find(params[:article_id])
     @comment = @article.comments.create(comment_params)
     redirect_to usertitle_path(@article.user_id,@article)

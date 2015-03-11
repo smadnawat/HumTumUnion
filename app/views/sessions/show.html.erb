@@ -1,55 +1,21 @@
 
 <br>
+<br>
+<center><%= link_to "View Events",index_path(@user),:class => "links" %></center><br>
 <% if current_user.role == 'Admin' %>
-<center> 
-<%#= link_to 'Manage Users' ,adminindex_path(@user)  %>
-<br>
-<%= link_to 'Add Event' ,  new_user_article_path(@user),:class => "links" %><br><br>
-<center><%= link_to "View Events" , index_path(@user),:class => "links" %></center><br>
-<%= link_to 'Manage Events' , user_articles_path(@user) ,:class => "links"%>
-<br>
+  
+
+<%= link_to 'Add Event',new_user_article_path(@user),:class => "links" %><br><br>
+<%= link_to 'Manage Events',user_articles_path(@user),:class => "links"%> <br><br>
+
+ <% if current_user.email == 'loveyhtu21@gmail.com' %>
+      <b>Special permission</b>
+      <br>......................<br>
+
+     <%= link_to 'Manage Users' ,adminindex_path(@user) ,:class => "links" %>
+     <br>.......................<br>
+   <%end%>
 </center>
-	<!-- <center>
-     <h1><font color="green"><u>Admin SignUp</u></font></h1>
-     <%= form_for :admin, url: admincreate_path do |f| %>
-       <p>
-        <%= render 'shared/error_messages' %>
-         <%= flash[:warning] %>
-       </p>
-       <table>
-       <tr>
-         <td>  <%= f.label :name %> </td>
-         <td>  <%= f.text_field :name %> </td>
-       </tr>
-       <tr>
-         <td> <%= f.label :email %></td>
-         <td> <%= f.email_field :email %></td>
-       </tr>
-       <tr>
-         <td> <%= f.label :password %></td>
-         <td> <%= f.password_field :password %> </td>
-       </tr>
-       <tr>
-         <td> <%= f.label :password_confirmation, "Confirmation" %></td>
-         <td> <%= f.password_field :password_confirmation %></td>
-       </tr>
-        <tr>
-        <td> <%= f.label :date , "Date of Birth" %></td>
-        <td><%= f.date_select :dob , start_year: 1970 , end_year:  Time.now.year - 18 %> </td>
-       </tr>
-       <tr>
-         <td> <%= f.label :role, "Role" %></td>
-         <td> <%= f.select :role, options_for_select([["Event Manager" ,"Admin"]]) %></td>
-       </tr>
-       <tr>
-         <td> <%= f.submit "Create Manager" %></td>
-       </tr>
-       </table>
-      <% end %>
-   </center> -->
-<% else %>
-<br><br>
-<center><%= link_to "View Events" , index_path(@user),:class => "links" %></center>
 <% end %>
 
 

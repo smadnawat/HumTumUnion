@@ -1,7 +1,4 @@
-<!-- <br>
-Hello <font color="green"><b><%= session[:name] %></b></font>
 
-<br><br><br>
 <center>
 <h3>List of all users </h3>
  
@@ -10,6 +7,8 @@ Hello <font color="green"><b><%= session[:name] %></b></font>
     <th> User Id</th>
     <th> Name </th>
     <th> E-Mail </th>
+    <th> User Type </th>
+    <th> Dob (YYYY/MM/DD) </th>
     <th> Delete </th>
    
   </tr>
@@ -19,7 +18,9 @@ Hello <font color="green"><b><%= session[:name] %></b></font>
       <td><%= user.id %></td>
       <td><%= user.name %></td>
       <td><%= user.email %> </td>
-      <td><%= link_to ' Delete '%></td>
+      <td><%= user.role %> </td>
+      <td><%= user.dob %> </td>
+      <td><%= link_to ' Delete ' , deleteuser_path(current_user,user), method: :delete %></td>
       
     </tr>
   <% end %>
@@ -27,7 +28,3 @@ Hello <font color="green"><b><%= session[:name] %></b></font>
 <br>
 <br>
 <%= link_to 'home' , show_path(@user) %>
-<br>
-<br>
- <%= link_to "Log out", logout_path, method: :delete %>
- </center> -->

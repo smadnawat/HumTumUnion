@@ -1,5 +1,4 @@
 class UsersController < ApplicationController
-
   def new
   	@user=User.new
     session[:id]=nil
@@ -17,12 +16,12 @@ class UsersController < ApplicationController
          render "new"
        end
      else
-      @user.errors.add(:dob, "should be over 18 years old")
-      render "new"
+       @user.errors.add(:dob, "should be over 18 years old")
+       render "new"
      end 
    else  
-    @user.errors.add(:dob,"can not blank")
-    render "new"
+     @user.errors.add(:dob,"can not blank")
+     render "new"
    end
   end
 

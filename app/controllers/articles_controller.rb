@@ -3,16 +3,15 @@ class ArticlesController < ApplicationController
   before_action :require_login 
  
 	def new    
-    @user = User.where(:id => session[:id])
+    @user = User.where(:id => current_user.id)
   end
 
 	def create
    @user=User.find(params[:user_id])
-   @article=@user.articles.create(params.require(:article).permit(:title,:text,:date, :image))
+   @article=@user.articles.create(params_require)
    @title = params[:article][:title]
    @text =params[:article][:text]
     if @title != '' && @text != ''
-      #p "*************#{@user}******************"
       redirect_to user_article_path(@user, @article)
     else
       flash[:warning] = " provide required data"
@@ -29,16 +28,12 @@ class ArticlesController < ApplicationController
   def edit 
     @user=User.find(params[:user_id])
     @article= Article.find(params[:id])
-      #render :json => @article.id
   end
    
   def update
-   #@user=User.find(params[:id])
-   #p "************#{@user.id}******#{@user.name}*****"
     @user=User.find(params[:user_id])
     @article = Article.find(params[:id])
-    #render :json => @article.id
-    if @article.update(params.require(:article).permit(:title, :text , :image))
+    if @article.update(params_require)
       redirect_to  user_articles_path(@user,@article)
     else
      render 'edit'
@@ -55,6 +50,10 @@ class ArticlesController < ApplicationController
    @article = Article.find(params[:id])
    @article.destroy 
    redirect_to user_articles_path
+  end
+
+  def params_require
+   params.require(:article).permit(:title, :text , :date ,:image)
   end
 
 

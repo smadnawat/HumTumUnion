@@ -25,7 +25,7 @@ Signup::Application.routes.draw do
   get    'adminshow/:id' => 'admin#show', as: 'adminshow' 
   get    'adminindex/:id'   =>  'admin#index', as: 'adminindex'
   post   'admincreate'   => 'admin#create'
-  delete 'current_user/:id/deleteuser/:id'  => 'admin#destroy', as: 'deleteuser'
+  delete 'current_user/:user_id/deleteuser/:id'  => 'admin#destroy', as: 'deleteuser'
 
 
   get    'login'   => 'sessions#new'
