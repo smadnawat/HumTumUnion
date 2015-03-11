@@ -8,11 +8,18 @@ class ArticlesController < ApplicationController
 
 	def create
    @user=User.find(params[:user_id])
-   @article=@user.articles.create(params_require)
    @title = params[:article][:title]
    @text =params[:article][:text]
-    if @title != '' && @text != ''
-      redirect_to user_article_path(@user, @article)
+   @date = params[:article][:date]
+    if @title != '' && @text != '' && @date != ''
+      @article=@user.articles.create(params_require)
+       #render :json => @article
+      if @article.id != nil
+       redirect_to user_article_path(@user, @article)
+      else
+       flash[:warning] = "provide valid Title"
+       redirect_to new_user_article_path(@user)
+      end
     else
       flash[:warning] = " provide required data"
       redirect_to new_user_article_path(@user)
