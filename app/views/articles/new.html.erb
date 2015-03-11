@@ -17,7 +17,8 @@
 
    <p>
     <%= f.label :date , "Date of Event" %><br>
-    <%= f.date_select :date %>
+    <%#= f.date_select :date%>
+    <%= f.text_field :date,:size => '20%',:readonly => 'true' ,:class =>'datepicker' %>
   </p>
 
 
@@ -35,3 +36,13 @@
 <%= link_to 'Back', :back ,:class => "links"  %><br>
 
 </center>
+
+
+
+<script>
+
+ $(document).ready(function(){
+    $('.datepicker').datepicker({format: 'yyyy-mm-dd' , startDate: '+0d',
+        autoclose: true});
+  });
+</script>

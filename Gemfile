@@ -52,8 +52,9 @@ gem 'validates_email_format_of'
 
 # for date picker ==>  jai
 gem 'jquery-ui-rails'
+gem 'bootstrap-datepicker-rails', :require => 'bootstrap-datepicker-rails',
+                              :git => 'git://github.com/Nerian/bootstrap-datepicker-rails.git'
 
-gem 'bootstrap-datepicker-rails'
 
 # gem 'protected_attributes'
 # Use Capistrano for deployment

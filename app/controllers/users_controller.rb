@@ -24,7 +24,7 @@ class UsersController < ApplicationController
            render "new"
          end 
       else  
-        @user.errors.add(:dob, "Date of birth can not blank")
+        @user.errors.add(:dob,"can not blank")
         render "new"
       end
   end

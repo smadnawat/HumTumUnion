@@ -16,13 +16,3 @@
 //= require_tree .
 //= require jquery-ui
 //= require bootstrap-datepicker
-
-//= require bootstrap-datepicker/core
-//= require bootstrap-datepicker/locales/bootstrap-datepicker.es.js
-//= require bootstrap-datepicker/locales/bootstrap-datepicker.fr.js
-
-
- $(document).ready(function(){
-    $('.datepicker').datepicker({dateFormat: 'yy-dd-mm' ,endDate: '+0d',
-        autoclose: true});
-  });

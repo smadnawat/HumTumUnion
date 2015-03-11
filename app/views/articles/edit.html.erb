@@ -16,7 +16,8 @@
 
    <p>
     <%= f.label :date , "Date of Event" %><br>
-    <%= f.date_select :date %>
+    <%#= f.date_select :date %>
+    <%= f.text_field :date,:size => '20%',:readonly => 'true' ,:class =>'datepicker' %>
   </p>
 
 
@@ -37,3 +38,19 @@
 <%= link_to 'Back' , :back , :class => "links" %>
 
  </center>
+
+
+
+
+<script>
+
+ $(document).ready(function(){
+  $( ".selector" ).datepicker({
+dateFormat: "yy-mm-dd"
+});
+    $('.datepicker').datepicker({format: 'yyyy-mm-dd' ,startDate: '+0d',
+        autoclose: true});
+  });
+</script>
+
+<!-- http://www.rubydoc.info/gems/bootstrap-datepicker-rails/0.3 -->
