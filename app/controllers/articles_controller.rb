@@ -3,7 +3,7 @@ class ArticlesController < ApplicationController
   before_action :require_login 
  
 	def new    
-    @user = User.where(:id => current_user.id)
+    #@user = User.where(:id => current_user.id)
   end
 
 	def create
