@@ -28,16 +28,11 @@
       <td> <center><%= link_to ' Edit ', edit_user_article_path(@user,article),:class => "links" %> </center></td>
       <td><%= link_to ' Delete ', user_article_path(@user,article),:class => "links", method: :delete,
               data: { confirm: 'Are you sure?' } %>
-
       </td>
-
     </tr>
   <% end %>
 </table>
-<br>
-
-
- 
+<br> 
 <br>
 <br>
 <%= link_to 'Home' , show_path(@user),:class => "links"%>

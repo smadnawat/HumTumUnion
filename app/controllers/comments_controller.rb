@@ -1,9 +1,8 @@
 class CommentsController < ApplicationController
-  
+  before_action :require_login
   def new
 
   end
-
 
   def create
     #logger.info "=======================#{params}"
@@ -12,7 +11,6 @@ class CommentsController < ApplicationController
     @comment = @article.comments.create(comment_params)
     redirect_to usertitle_path(@article.user_id,@article)
   end
-
   
   def destroy
     @article = Article.find(params[:article_id])
@@ -21,9 +19,8 @@ class CommentsController < ApplicationController
     redirect_to usertitle_path(@article.user_id,@article)
   end
 
-
-private
-    def comment_params
+   private
+   def comment_params
       params.require(:comment).permit(:Commenter , :comment)
-    end
-end
+   end
+  end
