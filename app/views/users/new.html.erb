@@ -1,7 +1,7 @@
 
 <center>
 <marquee bgcolor="green" behavior="alternate">
-<h1><font color = "white" > Welcome </font></h1></marquee>
+<h2><font color = "white" > Welcome </font></h2></marquee>
 
 <table border="1" bordercolor="green" width=50% style="margin-top:1%">
  <tr>
@@ -21,9 +21,7 @@
             <%= f.label :password %><br>
             <%= f.password_field :password %>
          </p>
-        <!--  <p>
-         <%#= f.select :role, options_for_select([["Select User Type","o"],["Event Manager", "Admin"], ["Audience", "User"]]) %>
-         </p> -->
+        
          <p>
             <%= f.submit "Log in" ,:class => "button"%>
          </p>
