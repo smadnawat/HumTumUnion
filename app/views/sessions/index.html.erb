@@ -24,7 +24,7 @@
       <% if article.date < @today %>
        <td> <font color="red"> Past Event</font> </td>
        <% elsif article.date == @today %>
-        <td> <font color="green">today's Event</font> </td>
+       <td> <font color="green">today's Event</font> </td>
        <% elsif article.date <= @lastday && article.date > @today %>
        <td> <font color="FF9900"> Comming</td></font>
       <% else %>

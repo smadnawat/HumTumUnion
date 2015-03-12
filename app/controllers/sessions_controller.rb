@@ -37,6 +37,8 @@ class SessionsController < ApplicationController
     @user=User.find(params[:user_id])
     @article = Article.find(params[:id])
     @likes = Like.where(:article_id => @article.id)
+    @Current_like = Like.where(:user_id => current_user.id , :article_id => @article.id)
+    @Current_total_like =@Current_like.count
     @comments = Comment.where(:article_id => @article.id)
   end
  
