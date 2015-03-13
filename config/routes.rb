@@ -19,7 +19,7 @@ Signup::Application.routes.draw do
     resources :likes
   end
   
-
+  
 
   get    'addadmin'   => 'admin#new'
   get    'adminshow/:id' => 'admin#show', as: 'adminshow' 
@@ -34,7 +34,7 @@ Signup::Application.routes.draw do
   post   'login'   => 'sessions#create'
   delete 'logout'  => 'sessions#destroy'
   get    'usertitle/:user_id/article/:id' => 'sessions#usertitle', as: 'usertitle'
-  get    'adminhome/:id' => 'sessions#adminhome', as: 'adminhome' 
+  get    'adminhome/:id' => 'sessions#ad-minhome', as: 'adminhome' 
   
    root 'users#new'
 
