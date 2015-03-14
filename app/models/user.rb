@@ -7,8 +7,10 @@ class User < ActiveRecord::Base
   validates :password, :format => {:with =>  /(?=.*?[A-Za-z])(?=.*?[0-9])/,length: { minimum: 6 }, message: "must be minimum 6 characters & alphanumeric."}
   #validates_presence_of :name, :email
   validates_uniqueness_of :email
-  validates_format_of :name,:presence => true,  with: /\A[a-zA-Z]+\z/
-  #:with => /\A[^0-9`!@#\$%\^&*+_=]+\z/
+  validates :name, :presence => true
+  validates_format_of :name,:with =>/\A[^0-9`!@#\$%\^&*+_=]+\z/
+  #with: /\A[a-zA-Z]+\z/   # without any white space and alphabates only
+  #:with => /\A[^0-9`!@#\$%\^&*+_=]+\z/  # allow white space but does not allow numeric and special character
   
 
   # validates :dob, :presence => true
