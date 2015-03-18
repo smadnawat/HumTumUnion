@@ -27,8 +27,8 @@ class User < ActiveRecord::Base
      end
    end
 
-   def self.get_user id 
-     find(id)
+   def self.get_user id  
+     find(id) 
    end
 
    def self.user id
