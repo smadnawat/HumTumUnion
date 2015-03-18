@@ -1,16 +1,36 @@
-<h2>Forgot your password?</h2>
 
-<%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
-  <%= devise_error_messages! %>
+<div class="header-wrapper">
+ <h2><font color = "white" > Welcome </font></h2>
+</div>
+<center>
+<table border="1" bordercolor="green" width=50% style="margin-top:10%">
+ <tr>
+    <td>
+    <center>
+      <h3><font color="green"><u>Forgot your password?</u></font></h3> 
+        <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %><p> <font color="red">
+        <%= devise_error_messages! %>
+         </font></p>
+         <p>
+          <div class="field">
+           <%= f.label :email %><br />
+           <%= f.email_field :email, autofocus: true %>
+          </div>
+          </p>
+          <p>
+          <div class="actions">
+            <%= f.submit "Send me reset password instructions" , :class =>'button' %>
+          </div>
+         </p>
+          <% end %>
+          <%= render "devise/shared/links" %>
+    </center>
 
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true %>
-  </div>
+    </td>
+  </tr>
+  </table>
 
-  <div class="actions">
-    <%= f.submit "Send me reset password instructions" %>
-  </div>
-<% end %>
+</center>
 
-<%= render "devise/shared/links" %>
+<div class="footer">jai.rajput@mobiloittegroup.com</div>
+

@@ -1,22 +1,45 @@
-<h2>Change your password</h2>
 
-<%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| %>
-  <%= devise_error_messages! %>
-  <%= f.hidden_field :reset_password_token %>
+<div class="header-wrapper">
+ <h2><font color = "white" > Welcome </font></h2>
+</div>
+<center>
+<table border="1" bordercolor="green" width=50% style="margin-top:10%">
+ <tr>
+    <td>
+    <center>
+      <h3><font color="green"><u>Change your password</u></font></h3> 
+      <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| %> <p> <font color="red">
+        <%= devise_error_messages! %>
+         </font></p>
+         <p>
+           <%= f.hidden_field :reset_password_token %>
 
-  <div class="field">
-    <%= f.label :password, "New password" %><br />
-    <%= f.password_field :password, autofocus: true, autocomplete: "off" %>
-  </div>
+            <div class="field">
+             <%= f.label :password, "New password" %><br />
+             <%= f.password_field :password, autofocus: true, autocomplete: "off" %>
+           </div>
+          <p>
+          </p>
+           <div class="field">
+             <%= f.label :password_confirmation, "Confirm new password" %><br />
+             <%= f.password_field :password_confirmation, autocomplete: "off" %>
+           </div>
+           <p>
+          </p>
+           <div class="actions">
+              <%= f.submit "Change my password" , :class => 'button' %>
+           </div>
+          <% end %>
+        </p>
+        
+     <%= render "devise/shared/links" %>
+    </center>
 
-  <div class="field">
-    <%= f.label :password_confirmation, "Confirm new password" %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "off" %>
-  </div>
+    </td>
+  </tr>
+  </table>
 
-  <div class="actions">
-    <%= f.submit "Change my password" %>
-  </div>
-<% end %>
+</center>
 
-<%= render "devise/shared/links" %>
+<div class="footer">jai.rajput@mobiloittegroup.com</div>
+

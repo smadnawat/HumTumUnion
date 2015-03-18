@@ -6,13 +6,13 @@ class AdminController < ApplicationController
   end
 
   def index
-   @user = User.find(params[:id])
-   @users = User.where('id != ?',current_user.id)
+   @user = User.get_user(params[:id])
+   @users = User.user(current_user)
   end
 
   def destroy
-   @user = User.find(params[:user_id])
-   @deleteuser = User.find(params[:id])
+   @user = User.get_user(params[:user_id])
+   @deleteuser = User.get_user(params[:id])
    @deleteuser.destroy 
    redirect_to adminindex_path(@user)
   end

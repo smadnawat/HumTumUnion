@@ -5,22 +5,22 @@ class LikesController < ApplicationController
   end
 
   def create
-    @article = Article.find(params[:article_id])
+    @article = Article.get_article(params[:article_id])
     @user_id= params[:like][:user_id]
-    @users = Like.where(:user_id => @user_id , :article_id => @article.id)
+    @users = Like.user_like(@user_id,@article.id)
     @total =@users.count
     if @total==0
      @likes = @article.likes.create(comment_params)
      redirect_to usertitle_path(@article.user_id,@article)
     else     
-     Like.where(:user_id => @user_id , :article_id => @article.id).destroy_all      
+     Like.delete_user_like(@user_id,@article.id)      
      redirect_to usertitle_path(@article.user_id,@article)   
     end
   end
   
   def index
-    @article = Article.find(params[:article_id])
-    @likes = Like.where(:article_id => @article.id)
+    @article = Article.get_article(params[:article_id])
+    @likes = Like.article_total_likes(@article.id)
   end 
 
   private

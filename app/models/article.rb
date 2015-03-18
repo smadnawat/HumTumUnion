@@ -8,4 +8,21 @@ class Article < ActiveRecord::Base
   
 
   mount_uploader :image, ImageUploader
+
+ def self.get_article id
+ 	find(id)
+ end
+
+ def self.user_articles id
+     where(:user_id => id)
+ end
+
+ def self.all_articles
+    all.order('date ASC')
+ end
+
+ # def my_method
+ #  self.find 	
+ # end
+
 end

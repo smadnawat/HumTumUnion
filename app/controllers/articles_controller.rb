@@ -7,12 +7,12 @@ class ArticlesController < ApplicationController
   end
 
 	def create
-   @user=User.find(params[:user_id])
+   @user=User.get_user(params[:user_id])
    @title = params[:article][:title]
    @text =params[:article][:text]
    @date = params[:article][:date]
     if @title != '' && @text != '' && @date != ''
-      @article=@user.articles.create(params_require)
+      @article=@user.articles.create(:title => @title.strip , :text => @text.strip ,:date => @date , :image => params[:article][:image])
        #render :json => @article
       if @article.id != nil
        redirect_to user_article_path(@user, @article)
@@ -28,18 +28,18 @@ class ArticlesController < ApplicationController
 
 
   def show
-    @user=User.find(params[:user_id])
-    @article = Article.find(params[:id])
+    @user=User.get_user(params[:user_id]) # get_user method is called from User model class, this is a class method this is called by class name
+    @article = Article.get_article(params[:id])  # get_article method is called from Article model class, this is a class method this is called by class name
   end
 
   def edit 
-    @user=User.find(params[:user_id])
-    @article= Article.find(params[:id])
+    @user=User.get_user(params[:user_id])
+    @article= Article.get_article(params[:id])
   end
    
   def update
-    @user=User.find(params[:user_id])
-    @article = Article.find(params[:id])
+    @user=User.get_user(params[:user_id])
+    @article = Article.get_article(params[:id])
     if @article.update(params_require)
       redirect_to  user_articles_path(@user,@article)
     else
@@ -48,13 +48,13 @@ class ArticlesController < ApplicationController
   end
 
   def index
-    @user=User.find(params[:user_id])    
-    @article = Article.where(:user_id => current_user.id)
+    @user=User.get_user(params[:user_id])    
+    @article = Article.user_articles(current_user.id)
   end
 
 
   def destroy
-   @article = Article.find(params[:id])
+   @article = Article.get_article(params[:id])
    @article.destroy 
    redirect_to user_articles_path
   end

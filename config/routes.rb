@@ -1,4 +1,5 @@
 Signup::Application.routes.draw do
+  devise_for :users
   get "comments/new"
   get "sessions/new"
   get "users/new"
@@ -28,13 +29,12 @@ Signup::Application.routes.draw do
   delete 'current_user/:user_id/deleteuser/:id'  => 'admin#destroy', as: 'deleteuser'
 
 
-  get    'login'   => 'sessions#new'
-  get    'show/:id' => 'sessions#show', as: 'show' 
-  get    'index/:id'   =>  'sessions#index', as: 'index'
-  post   'login'   => 'sessions#create'
-  delete 'logout'  => 'sessions#destroy'
+  # get    'login'   => 'sessions#new'
+  # get    'show/:id' => 'sessions#show', as: 'show' 
+   get    'index/:id'   =>  'sessions#index', as: 'index'
+  # post   'login'   => 'sessions#create'
+  # delete 'logout'  => 'sessions#destroy'
   get    'usertitle/:user_id/article/:id' => 'sessions#usertitle', as: 'usertitle'
-  get    'adminhome/:id' => 'sessions#ad-minhome', as: 'adminhome' 
   
    root 'users#new'
 

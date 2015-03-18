@@ -1,0 +1,17 @@
+<br>
+<br>
+<center><%= link_to "View Events", index_path(current_user),:class => "links" %></center><br>
+<% if current_user.role == 'Admin' %>
+  
+
+<%= link_to 'Add Event',new_user_article_path(current_user),:class => "links" %><br><br>
+<%= link_to 'Manage Events',user_articles_path(current_user),:class => "links"%> <br><br>
+
+ <% if current_user.email == 'loveyhtu21@gmail.com' %>
+      <b>Special permission</b>
+      <br>......................<br>
+     <%= link_to 'Manage Users' ,adminindex_path(current_user) ,:class => "links" %>
+     <br>.......................<br>
+   <%end%>
+</center>
+<% end %>

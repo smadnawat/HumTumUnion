@@ -4,7 +4,7 @@ Devise.setup do |config|
   # The secret key used by Devise. Devise uses this key to generate
   # random tokens. Changing this key will render invalid all existing
   # confirmation, reset password and unlock tokens in the database.
-  # config.secret_key = '8fbbd4e5dbf5be786b0572b837f12dcbdc38af63f44d72323d7ad47bc852aea60b957646e9c119c020fd529371517bf306a10c59def1a3a4164070395f290c28'
+  # config.secret_key = '9c65593811bd177b7443a1c06703cd597f6b0d73ff98cd0fba85b703ec7d4bd2c188ff1bf73e60b541ccc2fca03f4d5356dcc9a7b388f905bdc4c568c1601310'
 
   # ==> Mailer Configuration
   # Configure the e-mail address which will be shown in Devise::Mailer,
@@ -97,7 +97,7 @@ Devise.setup do |config|
   config.stretches = Rails.env.test? ? 1 : 10
 
   # Setup a pepper to generate the encrypted password.
-  # config.pepper = '91c96e905adb2132493e31c085948fcd75a248d7c31fee515e73ceb8a2cbf0993f27f1c517922842e7da052f37fadbc07adab1b0f84c5fe4266a2a3806cc7cfd'
+  # config.pepper = 'd96e1d82a610f5f94bb64f748a633a0bd26affc52f58175538582ee51a15100aad8646443e33052be8b0fd1f0261a958ad27b6349fa0c003b7cf535185aa0e91'
 
   # ==> Configuration for :confirmable
   # A period that the user is allowed to access the website even without
@@ -256,42 +256,4 @@ Devise.setup do |config|
   # When using omniauth, Devise cannot automatically set Omniauth path,
   # so you need to do it manually. For the users scope, it would be:
   # config.omniauth_path_prefix = '/my_engine/users/auth'
-
-  # ==> Security Extension
-  # Configure security extension for devise
-
-  # Should the password expire (e.g 3.months)
-  # config.expire_password_after = false
-
-  # Need 1 char of A-Z, a-z and 0-9
-  # config.password_regex = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z])/
-
-  # How many passwords to keep in archive
-  # config.password_archiving_count = 5
-
-  # Deny old password (true, false, count)
-  # config.deny_old_passwords = true
-
-  # enable email validation for :secure_validatable. (true, false, validation_options)
-  # dependency: need an email validator like rails_email_validator
-  # config.email_validation = true
-
-  # captcha integration for recover form
-  # config.captcha_for_recover = true
-
-  # captcha integration for sign up form
-  # config.captcha_for_sign_up = true
-
-  # captcha integration for sign in form
-  # config.captcha_for_sign_in = true
-
-  # captcha integration for unlock form
-  # config.captcha_for_unlock = true
-
-  # captcha integration for confirmation form
-  # config.captcha_for_confirmation = true
-
-  # Time period for account expiry from last_activity_at
-  # config.expire_after = 90.days
-
 end

@@ -2,44 +2,21 @@ class SessionsController < ApplicationController
   
   before_action :require_login , only: [:show, :usertitle,:index ]
 
-  def new
-   @user = User.new
-  end
-  
-  def create
-   @user = User.find_by_email(params[:session][:email])  
-   if @user && @user.authenticate(params[:session][:password])
-     session[:id] = @user.id  
-     redirect_to show_path(@user)
-   else
-     flash[:warning]  = "Invalid email or password"
-     redirect_to new_user_path
-   end 
-  end
-
-  def destroy
-   session[:id] = nil
-   redirect_to root_url, :notice => "Logged out!"
-  end
-
-  def show
-   @user = User.find(params[:id])
-  end
 
   def index    
-    @user=User.find(params[:id])
+    @user=User.get_user(params[:id])
     @today = Date.today
     @lastday= @today + 6.days
-    @article = Article.all.order('date ASC')
+    @article = Article.all_articles
   end
 
   def usertitle
-    @user=User.find(params[:user_id])
-    @article = Article.find(params[:id])
-    @likes = Like.where(:article_id => @article.id)
-    @Current_like = Like.where(:user_id => current_user.id , :article_id => @article.id)
+    @user=User.get_user(params[:user_id])
+    @article = Article.get_article(params[:id])
+    @likes = Like.article_total_likes(@article.id)
+    @Current_like = Like.user_like(current_user.id,@article.id)
     @Current_total_like =@Current_like.count
-    @comments = Comment.where(:article_id => @article.id)
+    @comments = Comment.article_comments(@article.id)
   end
  
 end
