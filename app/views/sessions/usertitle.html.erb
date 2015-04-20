@@ -3,16 +3,11 @@
 <%= flash[:warning]%>
 <table  bordercolor=brown, border=1>
   <tr><td>
-  Post by : <font color="3366FF"><b><%= @article.user.name %></b></font><br>
-  Event Title :<font color="brown"><b><%= @article.title %></b></font><br>
-  About Event :<font color="blue"><b><%= @article.text %></b></font><br>
-  Date of Event:<font color="blue"><b><%= @article.date %></b></font><br>
-   <center> <%= image_tag @article.image , :size => "150x200" %> </center>
-  </p>
-
+  Post by : <font color="green"><b><%= @article.user.name %></b></font><br>
+    <%= @article.about %><br>
+   <center> <%= image_tag @article.image , :size => "100x150" %> </center>
  </td></tr>
-  <tr><td>
-  
+  <tr><td>  
   <%= form_for :like , url: article_likes_path(@article) do |f| %>
    <%= f.hidden_field :user_id , :value => current_user.id , :readonly =>true %>
     <% if @Current_total_like == 0 %>
@@ -20,43 +15,24 @@
     <% else %>
       <%= f.submit "Unike" , :class => "button" %>
     <% end %>  
-      <b><font color="660033"><%= pluralize(@likes.count, "like") %></font></b>
+      <font color="660033"><%= pluralize(@likes.count, "Like") %></font>
    <%= link_to 'Show' , article_likes_path(@article), :class => "links" %>
   <% end %>
-
-
-
  </td></tr>
   <tr><td>
-
-
-  <h3><font color="660033"> <%= pluralize(@comments.count, "Comment") %></font></h3>
-
+  <font color="660033"> <%= pluralize(@comments.count, "Comment") %></font><br>
   <%= render @article.comments %>
-
  </td></tr>
   <tr><td>
     <%#= render 'shared/error_messages' %>
      <%= form_for([@article, @article.comments.build]) do |f| %>
-     <b>Leave your comment</b> 
-      
-     <%= f.hidden_field :Commenter , :value => current_user.id , :readonly =>true %><br>
-     <%= f.text_area :comment %><br>
+         
+     <%= f.hidden_field :Commenter , :value => current_user.id , :readonly =>true %>
+     <%= f.text_field :comment ,:size => 15, :placeholder => "Comment here" %><br>
   
     <%= f.submit "comment" ,:class => "button"  %>
 
     <% end %>
-
-
   </td></tr>
 </table>
-
-
-
-
-<br>
-
-<br>
-<%= link_to 'Home' , root_path(@user) ,:class => "links" %> | 
-<%= link_to "All Events" , index_path(@user) ,:class => "links"  %> 
  </center>

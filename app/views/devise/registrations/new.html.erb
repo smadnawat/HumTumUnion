@@ -1,73 +1,11 @@
-
-<div class="header-wrapper">
- <h2><font color = "white" > Welcome </font></h2>
-</div>
- <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  
 <center>
-<table border="1" bordercolor="green" width=50% style="margin-top:7%">
+<table border="1" bordercolor="green" style="margin-top:12%">
   <tr>
-   <td>
-    <center>
-     <h3><font color="green"><u>SignUp</u></font></h3>    
-         <p>
+   <td>    
     <font color="red"> <center> <%= devise_error_messages! %> </center></font>
-  </p>
-       <table>
-       <tr>
-         <td>  <%= f.label :name %> </td>
-         <td>  <%= f.text_field :name , autofocus: true %> </td>
-       </tr>
-
-       <tr>
-         <td> <%= f.label :email %></td>
-         <td>  <%= f.email_field :email%></td>
-       </tr>
-
-       <tr>
-         <td> <%= f.label :password %></td>
-         <td> <!-- <font color="red">
-          <%# if @validatable %>(<%#= @minimum_password_length %> characters minimum)
-               <%# end %></font><br /> -->
-               <%= f.password_field :password, autocomplete: "off" %>
-         </td>
-       </tr>
-
-       <tr>
-         <td> <%= f.label :password, "Confirmation" %></td>
-         <td> <%= f.password_field :password_confirmation, autocomplete: "off" %></td>
-       </tr>
-       <tr>
-        <td> <%= f.label :date , "Date of Birth" %></td>
-        <td> <%= f.text_field :dob,:size => '20%',:readonly => 'true' ,:class =>'datepicker',:placeholder =>'Select Date' %></td>
-       </tr>
-       <tr>
-         <td> <%= f.label :role, "Role" %></td>
-         <td> <%= f.select :role, options_for_select([["Event Manager" ,"Admin"],["Audience", "User"]])%></td>
-       </tr>
-    
-       <tr>
-         <td>  <%= f.submit "Sign up"  ,:class => "button" %></td>
-          <td><div style="text-align: right;"> <%= render "devise/shared/links" %></div></td>
-       </tr>
-      
-       </table>
-       
-   </center>
    </td>
   </tr>
  
 </table>
 
 </center>
-<% end %> 
-<div class="footer">jai.rajput@mobiloittegroup.com</div>
-
-
-<script>
- $(document).ready(function(){
-    $('.datepicker').datepicker({format: 'yyyy-mm-dd' ,endDate: '+0d',
-        autoclose: true});
-  });
-</script>
-

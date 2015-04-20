@@ -2,12 +2,12 @@ source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.0.0'
-
+gem 'geocoder'
 # Use sqlite3 as the database for Active Record
 #gem 'sqlite3'
  gem "pg"
 
- gem 'rails_12factor', group: :production
+ #gem 'rails_12factor', group: :production
 
 # Use SCSS for stylesheets
 
@@ -55,7 +55,7 @@ gem 'jquery-ui-rails'
 gem 'bootstrap-datepicker-rails', :require => 'bootstrap-datepicker-rails',
                               :git => 'git://github.com/Nerian/bootstrap-datepicker-rails.git'
 
-
+gem 'quiet_assets', group: :development
 # gem 'protected_attributes'
 # Use Capistrano for deployment
 # gem 'capistrano', group: :development

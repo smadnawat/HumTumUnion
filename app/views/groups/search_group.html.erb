@@ -1,0 +1,47 @@
+<center>
+<p> 
+<%= form_for :search_group , url: search_group_path(@user) do |f| %>
+	<%= f.text_field :search ,:size => 12,:placeholder => "Search Group by name"%>
+	<%= f.submit "Search" ,:class=>"button"%>
+<% end %> 
+</p>
+<% if @groups.present? %>
+	<h3>Results</h3>
+	<table border= "1" bordercolor="brown">
+		<tr>
+			<th> Group Name </th>
+			<th> Created by </th>
+			<th> Join/Leave </th>
+		</tr>
+		<% @groups.each do |grp| %>
+			
+				<tr>
+					<td> 
+						<%= grp.name %> 
+					</td>
+					
+					<% if grp.admin == current_user.id and is_user_in_group(@user.id,grp) %>
+						<td> 
+						<font color= red> You </font>
+						</td>
+						<td> Already member </td>
+					<% else %>
+						<td>
+					 	 	<%= find_user(grp.admin).name %> 
+					 	</td>
+					 	<td>
+					 		 <%= link_to "#{is_user_in_group(@user,grp) ? 'Leave' : 'Join'}" , join_group_path(@user,grp) , :class => "links" %> 
+					 	 </td>
+					<% end %>			
+				</tr>
+		
+		<% end %>
+
+	</table>
+<% else %>
+	 <br> _________________________________________________________</br><br>
+		No group found
+	 <br> _________________________________________________________</br>
+<% end %>
+
+</center>

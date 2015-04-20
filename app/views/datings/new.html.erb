@@ -1,0 +1,55 @@
+<p>
+<h3> You can date only your friends </h3>
+<%= form_for :dateform , url: user_datings_path(@user) do |f|  %>
+
+<%= f.select(:date_id, options_for_select(current_user_friends.collect{|o| [find_friend(o)[:name],find_friend(o)[:id]]}), {:prompt => "Select person for date"})%>
+  
+  <%= f.text_field :datingtime,:size => '20%',:readonly => 'true' ,:class =>'datepicker',:placeholder =>'Select Date' %></td>
+     
+		
+<%= f.submit "Invite for date", :class => "button" %>
+	
+<%end%>
+</p>	
+<p>	
+<%= flash[:notice] %>
+</p>
+<h3>Your fixed dates</h3>
+<table border= 1>
+<tr>
+	<th>date with</th>
+	<th>Date</th>
+	<th>Status</th>
+	<th>Action</th>
+</tr>
+<% @dating.each do |date| %>
+<tr>
+<td>
+	<% if date.datable_id == current_user.id %>
+		<font color="green"> You are dating to <%= find_user(date.date_id).name %> </font>
+	<% else %>
+		<font color="red"> You are dating by <%= find_user(date.datable_id).name %> </font>
+    <% end %>
+<td>
+	<%= date.time_of_dating %>
+</td>
+	<% if date.time_of_dating.to_datetime < @today %>
+       <td> <font color="red"> Past Event</font> </td>
+    <% elsif date.time_of_dating.to_datetime == @today %>
+       <td> <font color="green">today's Event</font> </td>
+    <% elsif date.time_of_dating.to_datetime <= @lastday && date.time_of_dating.to_datetime > @today %>
+       <td> <font color="FF9900"> Comming</td></font>
+    <% else %>
+        <td> Not now </td>
+    <% end %>
+
+<td><%= link_to "Reject", user_dating_path(current_user,date.time_of_dating), method: :delete %></td>	
+</tr>
+<% end %>
+</table>
+<script>
+ $(document).ready(function(){
+    $('.datepicker').datepicker({format: 'yyyy-mm-dd' ,startDate: '+0d',
+        autoclose: true});
+  });
+</script>

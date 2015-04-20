@@ -1,0 +1,68 @@
+<center>
+<p> 
+<%= form_for :search_group , url: search_group_path(@user) do |f| %>
+	<%= f.text_field :search ,:size => 12,:placeholder => "Search Group by name"%>
+	<%= f.submit "Search" ,:class=>"button"%>
+<% end %> 
+</p>
+<% if @group.present? %>
+	<font color = red><b> <%= flash[:notice] %> </b></font>
+	<h3> Your's Groups </h3> 
+	<table border= "1" bordercolor="brown">
+		<tr>
+			<th> Group Name </th>
+			<!-- <th> Created by </th> -->
+			<th> Show group </th>
+			<th> Send/View messages </th>
+			<th> Edit Name </th>
+			<th> Delete </th>
+		</tr>
+		<% @group.each do |group| %>
+				<tr>
+					<td> <%= group.name %> </td>
+					<!-- <td> <%#= find_user(group.admin).name %></td> -->
+					<td> <%= link_to 'Show' , user_group_path(@user,group) , :class => "links" %>  </td>
+					<td> <%= link_to 'Messages' , new_group_message_path(@user,group) ,:class=>"links"%></td>
+					<td> <%= link_to 'Edit' ,  edit_user_group_path(@user,group) , :class => "links" %>  </td>
+					<td> <%= link_to 'Delete' ,  user_group_path(@user,group), :class => "links", method: :delete,data: { confirm: 'Are you sure?' } %>
+					</td>
+				</tr>				
+		<% end %>
+	</table>
+<% else %>
+	 <br> _________________________________________________________</br><br>
+		You have not created any group
+	 <br> _________________________________________________________</br>
+<% end %>
+<% if @groups.present? %>
+	<h3>You joined these others groups</h3>
+	<font color = red><b> <%= flash[:notice] %> </b></font>
+	<table border= "1" bordercolor="brown">
+		<tr>
+			<th> Group Name </th>
+			<th> Created by </th>
+			<th> View Group </th>
+			<th> send/view messages </th>
+			<th> Leave Group </th>
+		</tr>
+		<% @groups.each do |grp| %>
+			<% if grp.admin != current_user.id %>
+				<tr>
+					<td> <%= grp.name %> </td>
+					<td> <%= find_user(grp.admin).name %></td>
+					<td> <%= link_to 'Show Group' , show_group_path(@user,grp) , :class => "links" %>  </td>
+					<td> <%= link_to 'Messages' , new_group_message_path(@user,grp) ,:class=>"links"%></td>
+					<td> <%= link_to 'Leave' , join_group_path(@user,grp) , :class => "links" %>  </td>
+				</tr>
+			<% end %>	
+		<% end %>
+
+	</table>
+<% else %>
+	 <br> _________________________________________________________</br><br>
+	 <font color = red><b> <%= flash[:notice] %> </b></font><br>
+		You have not joined any other group
+	 <br> _________________________________________________________</br>
+<% end %>
+
+</center>

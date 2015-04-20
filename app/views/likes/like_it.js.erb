@@ -1,0 +1,4 @@
+
+id = "<%= articlee.id%>"
+$('#likes_'+id).html("<%= j render :partial => 'likes/like_count', :locals=> {:articlee => articlee}  %>");
+

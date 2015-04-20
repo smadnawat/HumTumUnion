@@ -1,0 +1,15 @@
+<center>
+<%= form_for :group , url: user_groups_path(@user) do |f| %>
+
+	<p><h3> Create your Group </h3></p>
+	<p>
+		<%= f.label :name ,"Group Name" %> <br>
+		<%= f.text_field :name %>
+	</p>
+	<p>
+		<%= f.submit "Create Group" %>
+	</p>
+
+<% end %>
+
+</center>

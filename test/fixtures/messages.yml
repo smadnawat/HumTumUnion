@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  content: MyString
+  image: MyString
+  reciever: 1
+  user_id: 
+  group_id: 
+
+two:
+  content: MyString
+  image: MyString
+  reciever: 1
+  user_id: 
+  group_id: 

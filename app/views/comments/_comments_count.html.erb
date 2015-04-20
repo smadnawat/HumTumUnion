@@ -1,0 +1,30 @@
+ <font color="660033"> <%= pluralize(article_comments(article).count, "Comment") %></font><br>
+<div class="comment_content">   
+	 <% comments.each do |commentt| %>
+		 <% if commentt.Commenter.to_i == current_user.id %>
+		    <font color="green"><%= find_user(commentt.Commenter).name %> : </font>
+		     <font color="333300"><%= commentt.comment %></font>
+		    <%= link_to 'X', [commentt.article, commentt],
+		               method: :delete,
+		               data: { confirm: 'Are you sure?' } ,:remote=> true , :class => "links"%>
+
+
+		     <% else %>
+		     <font color="3366FF"><%= find_user(commentt.Commenter).name %> : </font>
+		      <font color="666600"><%= commentt.comment %></font>
+
+		  	  <% end %><br>
+
+	<% end %>
+</div>
+
+ <%= form_for :comment , url: add_comment_path(:article => article.id), :remote => "true" do |f| %>
+               
+           <%= f.hidden_field :Commenter , :value => current_user.id , :readonly =>true %>
+           <%= f.text_field :comment ,:size => 20, :placeholder => "Comment here" %><br>
+        
+           <%= f.submit "comment" ,:id =>"comment",:class => "button"  %>
+ <% end %>
+
+
+ 

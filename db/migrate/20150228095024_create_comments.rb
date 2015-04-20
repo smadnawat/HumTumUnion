@@ -5,7 +5,7 @@ class CreateComments < ActiveRecord::Migration
     t.integer  "article_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "Commenter"
+    t.integer   "Commenter"
     end
 
     add_index "comments", ["article_id"], name: "index_comments_on_article_id"

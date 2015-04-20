@@ -1,0 +1,47 @@
+<center>
+<p> 
+<%= form_for :search_users , url: search_person_path(@user,@group) do |f| %>
+	<%= f.text_field :users ,:size => 12,:placeholder => "Search person by name"%>
+	<%= f.submit "Search" ,:class=>"button"%>
+<% end %> 
+</p>
+<% if @users.present? %>
+	<h3>Results</h3>
+	<table border= "1" bordercolor="brown">
+		<tr>
+			<th> Name </th>
+			<th> Add to group </th>
+			<th> Status </th>
+		</tr>
+		<% @users.each do |person| %>
+			
+				<tr>
+					<td> 
+						<%= person.name %> 
+					</td>
+					
+					<% if person.id == current_user.id and is_user_in_group(person,@group) %>
+						<td> 
+						<font color= red> You </font>
+						</td>
+						<td> Already member </td>
+					<% else %>
+						<td>
+					 	 	<%= person.name %> 
+					 	</td>
+					 	<td>
+					 		 <%= link_to 'Add' , join_group_path(person,@group) , :class => "links" %> 
+					 	 </td>
+					<% end %>			
+				</tr>
+		
+		<% end %>
+
+	</table>
+<% else %>
+	 <br> _________________________________________________________</br><br>
+		Person not found
+	 <br> _________________________________________________________</br>
+<% end %>
+
+</center>

@@ -1,16 +1,15 @@
 class Article < ActiveRecord::Base
   belongs_to :user
-  has_many :comments , dependent: :destroy
+  has_many :comments  , dependent: :destroy
   has_many :likes , dependent: :destroy
   
-  validates_presence_of :title, :text
-  validates_format_of :title, :with => /\A[^0-9`!@#\$%\^&*+_=]+\z/
+  #validates_format_of :title, :with => /\A[^0-9`!@#\$%\^&*+_=]+\z/
   
 
   mount_uploader :image, ImageUploader
 
  def self.get_article id
- 	find(id)
+ 	find_by_id(id)
  end
 
  def self.user_articles id
@@ -24,5 +23,6 @@ class Article < ActiveRecord::Base
  # def my_method
  #  self.find 	
  # end
+
 
 end

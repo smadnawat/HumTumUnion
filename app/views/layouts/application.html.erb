@@ -2,81 +2,248 @@
 <html>
 <head>
   <title>Signup</title>
+  
+  <!-- <meta http-equiv="Refresh" Content="5"> -->
+
   <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
   <%= csrf_meta_tags %>
 
-  <style type="text/css">
-  .button
-  {
-    background-color: green ;
-    border-radius:25px ;
-    color: white;
 
-  }
- .button:hover
- {
-   background-color: white ;
-    color: green;
- }
+<script type="text/javascript">
 
- .links
- {
- 	color :red; 	
- 	text-decoration: none;
- }
- .links:hover
- {
- 	color: #9900CC;
- }
+<% if current_user.present? %>
 
- 
-.header-wrapper
- {
-  background-color:green;
-  text-align: justify;
-  color:white;
-  width:100%;
-  height: 10vh;
-  z-index:999;
- }
+     // a functin that call a function in every 5 sec
+       var pingAfter = 4000;  
+        var refreshId = setInterval(function()
+        {
+          // console.log("hit");
+          $.ajax({
+        type: "GET",
+        url: "/count_request/<%=current_user.id%>",
+        data:{},
+        dataType: "script",
+        success:function(data){
+              // alert(data);                  
+            },
+            error: function() {
+              // alert('Something went wrong. Please try again..');    
+            }
+          });
 
- .footer
- {
+        }, pingAfter);
+<% end %>
 
-  background-color:green;
-  width:100%;
-  color:white;
-  text-align:center;
-  height:50%;
-  margin-top:15%;
- }
-
-
-</style>
-
+</script>
+  
 
 </head>
 
 <body>
 
-<% if current_user.present? %>
-<br><br>Hello <font color="green" ><b> <%= current_user.name %>
-</b></font><br><br>
+  <div class="main">
+    <% if current_user.present? %>
 
-<center><br> <b><%= current_user.email %></b>
-<% else %>
+        <div class="header_bar">
+            <div class="profile_pic">  
+                <% if current_user.profile.image.to_s ==''%>
+                    <% if current_user.gender == 'male' %>
+                        <%= image_tag ("not_male.jpeg") , :size => "70x91" %> 
+                     <% else %>
+                        <%= image_tag ("not_female.jpeg") , :size => "70x91" %> 
+                     <% end %>
+               <% else %>
+                      <%= image_tag current_user.profile.image , :size => "70x91" %> 
+               <% end %>
+            </div>
+            <div class="welcome">Welcome </div>
+            <div class = "name_plate">
+              Hello <font color="green" ><%= current_user.name %> <br>
+              <%= current_user.email %></font>
+            </div>
+            <div class="request_logo">
+            <%= link_to image_tag('request.png',:size => "30x30"), show_request_path(current_user),:title =>  "Friend request" %>
+                <div id = "friend_request" style="display : inline; color:white;">
+                 <b> <%= current_user_request.count %></b>
+                </div>
+            </div>
+             <div class="request_logo">
+               <%= link_to image_tag('date.png',:size => "30x30"),  request_for_date_path,:title =>  "People want to date you" %>
+                <div id = "date_request" style="display : inline; color:white;">
+                 <b> <%= current_user_date_request.count %></b>
+                </div>
+            </div>
+             <div class="request_logo">
+              <%= link_to image_tag('Message.png',:size => "30x30"),  user_messages_path(current_user),:title =>  "New Messages" %>
+            
+                   <div id = "new_message" style="display : inline; color:white;">
+                     <b> <%= current_user_new_message.count %></b>
+                  </div>
+              </div>
+           <!--  <div class="request_logo">
+            <%#= link_to image_tag('notification.png',:size => "30x30"), find_friend_path(current_user),:title =>  "Notifications" %>
+            </div> -->
+             <div class="request_logo">
+            <%= link_to image_tag('search.png',:size => "30x30"), find_friend_path(current_user),:title =>  "Search People" %>
+            </div>
 
-<% end %>
+            <div class="logout">
+               <%= link_to image_tag('logout.png',:size => "40x40"),  destroy_user_session_path, method: :delete,:title =>  "Logout" %>
+              <%#= link_to "Log-out",  destroy_user_session_path, method: :delete %>
+            </div>
+        </div>
+          <div class = "left_bar">
+                <div class="left_bar_item">
+                <%= link_to 'Home' , root_path(current_user) ,:class => "left_bar_links" %>
+                </div>
+                <div class="left_bar_item">
+                  <%= link_to "Friend list",friend_list_path(current_user),:class => "left_bar_links" %>
+                </div>
+                 <div class="left_bar_item">
+                    <%= link_to 'Blocked list' , block_list_path(current_user) ,:class => "left_bar_links" %>
+                 </div>
+                  <div class="left_bar_item">
+                    <%= link_to 'Inbox', inbox_path(current_user),:class => "left_bar_links" %>
+                </div>
+               <div class="left_bar_item">
+                    <%= link_to 'My Dates',new_user_dating_path(current_user),:class => "left_bar_links" %>
+               </div> 
+                <div class="left_bar_item">
+                    <%= link_to 'Manage Posts',user_articles_path(current_user),:class => "left_bar_links" %>
+                </div>
+                 <div class="left_bar_item">
+                    <%= link_to 'Create Group', new_user_group_path(current_user),:class => "left_bar_links" %>
+                </div>
+                 <div class="left_bar_item">
+                    <%= link_to 'My Groups',user_groups_path(current_user),:class => "left_bar_links" %>
+                </div>
 
-<%= yield %>
+          
+                   <% if current_user.email == 'loveyhtu21@gmail.com' %>
+                    <div class="left_bar_item">
+                     <%= link_to '*All Groups*',all_groups_path(current_user),:class => "left_bar_links" %>
+                   </div>
+                    <div class="left_bar_item">
+                      <%= link_to '*Manage Users*' ,adminindex_path(current_user) ,:class => "left_bar_links" %>
+                     </div>
+                   <%end%>
 
 
-<% if user_signed_in? %>
-<br><div style="text-align : center;"><%= link_to "Log-out",  destroy_user_session_path, method: :delete %></div>
-<% end %>
-   <!-- <p class="notice"><%= notice %></p> -->
-       <p class="alert"><%#= alert %></p>
+                 <div class="left_bar_item">
+                    <%= link_to "My Profile",  profile_path(current_user),:class => "left_bar_links" %>
+                </div>
+                 <div class="left_bar_item">
+                    <%= link_to "Change Password", setting_path(current_user),:class => "left_bar_links" %>
+                </div>
+          </div> 
+          <div class="right_scroll_bar">
+            <div class="right_bar_single_item">
+                Friend List
+            </div>
 
+            <% if current_user_friends.present? %>
+                 <% current_user_friends.each do |friend| %> 
+
+                     <div class="right_bar_item">
+                        <% if current_user.id != friend.friend_id %>
+                            <%#= link_to "#{find_user_by_friend_id(friend.friend_id).name }",profile_path(find_user_by_friend_id(friend.friend_id).id ) ,:class => "left_bar_links" %>
+                             <%= link_to "#{find_user_by_friend_id(friend.friend_id).name }" ,new_user_message_path(find_user_by_friend_id(friend.friend_id).id),:class => "left_bar_links" %>
+                          <% else %>
+                                 <%#= link_to "#{friend.user.name }",new_user_message_pathprofile_path(friend.user.id),:class => "left_bar_links" %>
+                                  <%= link_to "#{friend.user.name }",new_user_message_path(friend.user_id),:class => "left_bar_links" %>
+                          <% end %>
+                      </div>
+                 <% end %>
+            <% else %>
+                <div class="right_bar_blank_item">
+                    Not any Friend
+                </div>
+            <% end %>
+          </div>
+      <center>
+
+      <div class="content">
+
+          <%= flash[:warning]%>
+          <div style="border:1px solid brown; width: 500px;max-width:500px;">
+              <%= render 'articles/new' %>
+          </div>  <br>
+        <%= yield %>
+      </div>
+
+       </center>
+    <% else %>
+  <!-- ##################################-Header-###################################### -->
+  <% if !current_user %>
+    <div class="landing_header">
+    <a href="/">
+      <div class="landing_header_logo">
+      </div>
+    </a>  
+
+      <div class="sign_in_header">
+        <%#= form_for :resource , url: session_path() %>
+      <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+      <%= f.email_field :email, autofocus: true ,:size=>'13%',:placeholder => 'Enter your e-mail',:class => "inline"%>
+      <%= f.password_field :password, autocomplete: "off" ,:size=>'13%',:placeholder => 'Enter your password'%>
+      <%= f.submit "Log in" ,:class =>"button"%>
+      <% end %>
+       <%= link_to "Forgot your password?", new_password_path(resource_name)  , :class => 'left_bar_links'%>
+      </div>
+    </div>
+
+    <div class="landing_sign_up">
+      
+    <!-- ############################################################# -->
+<center>
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+
+<p>
+<%= f.text_field :name , autofocus: true, :placeholder =>'Please enter your name' %> 
+</p>
+<p>
+<%= f.select :gender, options_for_select([["Gender" , nil],["Male" ,"male"],["Female", "female"]]) , :placeholder =>'Please enter your name'%>
+</p>
+<p> 
+<%= f.email_field :email,:placeholder =>'Please enter valid email'%>
+</p>
+<p>
+<%= f.password_field :password, autocomplete: "off",:placeholder =>'Please enter a password' %>
+</p>
+<p>
+<%= f.password_field :password_confirmation, autocomplete: "off",:placeholder =>'confirmation of password'%>
+</p>
+<p>
+<%= f.text_field :dob,:size => '20%',:readonly => 'true' ,:class =>'datepicker',:placeholder =>'Select Date' %><br>
+</p>
+<p>
+<%= f.submit "Sign up"  ,:class => "button" %>
+</p>
+<%= link_to "Did'nt recieve confirmation", new_user_confirmation_path , :class => 'left_bar_links' %>
+<% end %> 
+</center>
+<script>
+ $(document).ready(function(){
+    $('.datepicker').datepicker({format: 'yyyy-mm-dd' ,endDate: '+0d',
+        autoclose: true});
+  });
+</script>    
+
+    <!-- ################################################################ -->
+
+    </div>
+     <%= yield %>
+     <div class="landing_footer">
+        <center>  <p>Copyright © 2015 || All rights are Reserved</p>  </center>
+    </div>
+    <% end %>
+    <% end %>
+
+
+
+     <!-- <p class="notice"><%= notice %></p> -->
+         <p class="alert"><%#= alert %></p>
+  </div>
 </body>
 </html>

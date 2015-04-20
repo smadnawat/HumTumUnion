@@ -8,7 +8,7 @@
  
 <p>
   <strong>About Event:</strong>
-  <%= @article.text %><br>
+  <%= @article.about %><br>
 </p>
 <p>
   <strong>Date of Event: </strong>
@@ -21,6 +21,5 @@
 
 
 <%= link_to ' Edit ', edit_user_article_path(@user,@article),:class => "links"  %> | 
-<%= link_to ' New ' , new_user_article_path,:class => "links"  %> | 
-<%= link_to 'Home' , root_path(@user),:class => "links"  %>
+
  </center>

@@ -1,33 +1,16 @@
+
 <% if user_signed_in? %>
   <%= render 'users/new' %>
 <% else %>
-<div style="margin-top:3%;">
-<font color="red"><center><big><b><u>EVENT MANAGEMENT SYSTEM:</u></b></big></font><br><br><br>
 
 </center>
-<div style="margin-left:9%">
-
-1) Two types of Users Event Manager &amp; Audience, can sign up sign in &amp; log out using devise gem.<br>
-2) Sign Up for both as Event Manager or Audience.<br>
-3) Event Manager can create n number of events and can add photo for event.<br>
-4) Home Page will have link for listing upcoming events of next 7 days and other will list past events(image with name and date of event).<br>
-5) Clicking on event will take to the event show page where Audience can able to like the event and add comment to the event.<br>
-6) Validation: Event Manager should and must be above 18 yrs. Sign up page will have field for adding Date Of Birth &amp; password should be      
-   alphanumeric.<br>
-
-<br><br><br>
-NOTE: <br>
-1) Exceptions should be handled properly, No blank input can be accepted any where.<br>
-2) Design is not a big concern, but should not be absurd.<br>
-3) App flow should be perfect.  <br>
-<br><br>
-<font color="blue"><center><%= flash[:notice] %></center></font>
-<br>
+<div class= "content1">
 
 </div>
-<center><%= link_to 'Signup', new_user_registration_path %>  |
-<%= link_to "Log in", new_user_session_path  %>
-</center>
-</div>
+<div class= "content2">
 
+</div>
+<div class= "content3">
+
+</div>
 <% end %>

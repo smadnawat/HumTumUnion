@@ -7,22 +7,20 @@ class ArticlesController < ApplicationController
   end
 
 	def create
-   @user=User.get_user(params[:user_id])
-   @title = params[:article][:title]
-   @text =params[:article][:text]
-   @date = params[:article][:date]
-    if @title != '' && @text != '' && @date != ''
-      @article=@user.articles.create(:title => @title.strip , :text => @text.strip ,:date => @date , :image => params[:article][:image])
+     @about =params[:article][:about]
+     @image = params[:article][:image]
+    if @about != '' or @image != nil
+      @article=current_user.articles.create(:title =>"Blank" , :about => @about.strip ,:date => Date.today , :image => params[:article][:image])
        #render :json => @article
       if @article.id != nil
-       redirect_to user_article_path(@user, @article)
+       redirect_to root_path(current_user)
       else
-       flash[:warning] = "provide valid Title"
-       redirect_to new_user_article_path(@user)
+       flash[:warning] = "Something wrong"
+       redirect_to root_path(current_user)
       end
     else
       flash[:warning] = " provide required data"
-      redirect_to new_user_article_path(@user)
+      redirect_to root_path(current_user)
     end
   end
 
@@ -48,19 +46,22 @@ class ArticlesController < ApplicationController
   end
 
   def index
-    @user=User.get_user(params[:user_id])    
+    @user=User.get_user(current_user.id)    
     @article = Article.user_articles(current_user.id)
   end
 
 
   def destroy
    @article = Article.get_article(params[:id])
-   @article.destroy 
-   redirect_to user_articles_path
+   @article.comments.each{|c| c.destroy}
+   @article.likes.each{|l| l.destroy}
+   @article.destroy
+    redirect_to user_articles_path
+  
   end
 
   def params_require
-   params.require(:article).permit(:title, :text , :date ,:image)
+   params.require(:article).permit(:title, :about , :date ,:image)
   end
 
 

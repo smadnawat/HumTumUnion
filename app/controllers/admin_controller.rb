@@ -10,10 +10,25 @@ class AdminController < ApplicationController
    @users = User.user(current_user)
   end
 
+  def all_groups
+    @user = User.get_user(params[:id])
+    @group= Group.all
+  end
+
   def destroy
    @user = User.get_user(params[:user_id])
    @deleteuser = User.get_user(params[:id])
-   @deleteuser.destroy 
+   @deleteuser.comments.each{ |c| c.destroy }
+   @deleteuser.likes.each{ |l| l.destroy }
+   @deleteuser.articles.each{ |a| a.destroy }
+   @deleteuser.groups.each{|g| g.destroy }
+   @deleteuser.messages.each { |m| m.destroy }
+   @deleteuser.destroy
+   
+   #@article.comments.each{|c| c.destroy}
+   #@article.likes.each{|l| l.destroy}
+   #@article.destroy
+
    redirect_to adminindex_path(@user)
   end
 

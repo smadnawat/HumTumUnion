@@ -1,17 +1,48 @@
-<br>
-<br>
-<center><%= link_to "View Events", index_path(current_user),:class => "links" %></center><br>
-<% if current_user.role == 'Admin' %>
-  
 
-<%= link_to 'Add Event',new_user_article_path(current_user),:class => "links" %><br><br>
-<%= link_to 'Manage Events',user_articles_path(current_user),:class => "links"%> <br><br>
 
- <% if current_user.email == 'loveyhtu21@gmail.com' %>
-      <b>Special permission</b>
-      <br>......................<br>
-     <%= link_to 'Manage Users' ,adminindex_path(current_user) ,:class => "links" %>
-     <br>.......................<br>
-   <%end%>
-</center>
-<% end %>
+
+
+<div id="feeds" style = "border:1px solid brown; width: 100%">
+    <% @article.each do |article| %>
+        Post by : <font color="green"><b><%= article.user.name %></b></font><br>
+         <div class="comment_content"> <%= article.about %></div>
+         <center> <%= image_tag article.image , :size => "120x150" %> </center>
+         <div id="likes_<%=article.id%>">
+             <%= render :partial => 'likes/like_count', :locals=> {:articlee => article}%>
+         </div>  
+              <%#= render article.comments %>
+        <div id = "comments_<%= article.id %>">
+              <%= render :partial => 'comments/comments_count', :locals=> {:article => article ,:comments => article.comments}%>
+         </div>
+         ________________________________________________ <br><br>         
+       
+     <% end %>
+ </div>
+
+
+
+
+
+
+<script type="text/javascript">
+     // // a functin that call a function in every 5 sec
+     //   var pingAfter = 10000;  
+     //    var refreshId = setInterval(function()
+     //    {
+     //      // console.log("hit");
+     //      $.ajax({
+     //    type: "GET",
+     //    url: "/update_feeds/<%=current_user.id%>",
+     //    data:{},
+     //    dataType: "script",
+     //    success:function(data){
+     //          // alert(data);                  
+     //        },
+     //        error: function() {
+     //          // alert('Please try again..');    
+     //        }
+     //      });
+
+     //    }, pingAfter);
+
+</script>

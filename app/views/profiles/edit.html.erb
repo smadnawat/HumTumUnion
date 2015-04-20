@@ -1,0 +1,66 @@
+<center>
+     <h1><font color="green"><u>Profile</u></font></h1>
+
+     <%= form_for :profile , url: user_profile_path(@user,@profile), method: :patch do |f| %>
+       <p>
+        <%= render 'shared/error_messages' %>
+  
+       </p>
+       <table>
+       <tr>
+         <td>  <%= f.label :Contact %> </td>
+         <td>  <%= f.text_field :contact %> </td>
+       </tr>
+
+       <tr>
+         <td>  <%= f.label :image ,"Upload Profile Picture" %></td>
+         <td>  <%= f.file_field :image %></td>
+       </tr>
+
+       <tr>
+         <td> <%= f.label :Status %></td>
+         <td> <%= f.text_field :status %> </td>
+       </tr>
+
+       <tr>
+         <td> <%= f.label :About %></td>
+         <td> <%= f.text_field :about %></td>
+       </tr>
+        <tr>
+         <td>  <%= f.label :Address %> </td>
+         <td>  <%= f.text_field :address %> </td>
+       </tr>
+        <tr>
+         <td>  <%= f.label :zipcode %> </td>
+         <td>  <%= f.text_field :zipcode %> </td>
+       </tr>
+
+       <tr>
+         <td> <%= f.label :city,"City/Town" %></td>
+         <td>  <%= f.text_field :city%> </td>
+       </tr>
+       <tr>
+         <td> <%= f.label :state %></td>
+         <td>  <%= f.text_field :state%> </td>
+       </tr>
+       <tr>
+         <td> <%= f.label :Country %></td>
+         <td> <%= f.text_field :country %> </td>
+       </tr>
+
+       <tr>
+         <td> <%= f.label :Hobby %></td>
+         <td> <%= f.text_field :hobby %></td>
+       </tr>
+    
+       <tr>
+         <td> <%= f.submit "Update Profile" , :class => "button" %></td>
+            <!--  <td> <%#= link_to "Already registered" , login_path %></td> -->
+       </tr>
+   
+
+
+       </table>
+
+      <% end %>
+   </center>

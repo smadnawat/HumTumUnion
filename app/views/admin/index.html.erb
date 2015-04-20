@@ -2,13 +2,12 @@
 <center>
 <h3>List of all users </h3>
  
-<table bordercolor=brown border=1>
+<table bordercolor=brown border=1 class="wide-table">
   <tr >
     <th> User Id</th>
     <th> Name </th>
     <th> E-Mail </th>
-    <th> User Type </th>
-    <th> Dob (YYYY/MM/DD) </th>
+    <th> Status </th>
     <th> Delete </th>
    
   </tr>
@@ -18,8 +17,11 @@
       <td><%= user.id %></td>
       <td><%= user.name %></td>
       <td><%= user.email %> </td>
-      <td><%= user.role %> </td>
-      <td><%= user.dob %> </td>
+      <% if user.confirmed_at.nil? %>
+      <td><font color="red"> Not Confermed yet </font></td>
+      <%else%>
+      <td><font color="green"> Confermed </font></td>
+      <%end%>
       <td><%= link_to ' Delete ' , deleteuser_path(current_user,user), method: :delete %></td>
       
     </tr>

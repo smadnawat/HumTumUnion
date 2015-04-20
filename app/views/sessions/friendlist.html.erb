@@ -1,0 +1,43 @@
+<br><br>Friend List
+<br>
+<%= flash[:notice] %>
+<br>
+<% if @request.count != 0  %>
+<table border="1">
+	<tr>
+	    <th> Name </th>
+	    <th> View Profile </th>
+	    <th> Unfriend </th>
+	    <th> Block </th>	   
+	</tr>
+    <% @request.each do |request| %>
+    <tr>
+		<% if @user.id != request.friend_id %>
+		 <td>
+		 	<%= find_user_by_friend_id(request.friend_id).name %>
+
+		 </td>
+		  <td>
+		  	<%= link_to 'View' , profile_path(request.friend_id) ,:class => "links"%>
+		  </td>
+		<% else %>
+		  <td>
+		  	<%= request.user.name %>
+		  </td>
+		    <td> 
+		  	<%= link_to 'View' , profile_path(request.user_id) ,:class => "links"%>
+		  </td>
+		<% end %>
+
+		<td>
+          <%= link_to 'Unfriend' ,unfriend_path(@user,request),data:{ confirm:'you want to Unfriend this persion ?'},:class => "links"%>
+		</td>
+		<td>
+		 <%= link_to 'Block',block_path(@user,request),data:{ confirm:'Are you sure you want to block this person?'},:class => "links"%>
+		</td>
+	</tr>
+    <% end %>
+</table>
+<% else %>
+You have not any friend yet<br>
+<% end %>

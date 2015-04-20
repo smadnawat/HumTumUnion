@@ -1,0 +1,41 @@
+<div style="width:100vh; margin-left:0%; border: 1px solid black;">
+<p> 
+<%= form_for :search_users, url: search_person_path(@user,@group) do |f| %>
+	<%= f.text_field :users,:size => 12,:placeholder => "Search person by name"%>
+	<%= f.submit "Search" ,:class=>"button"%>
+<% end %> 
+</p>
+<h3> Add members to <%= @group.name %> </h3>
+<font color = red> <%= flash[:notice] %> </font>
+
+<div style="display: inline" >
+	<table border="1px brown">
+		<tr>
+			<th> Friend Name </th>
+			<th>Add/Remove </th>
+		</tr>
+		<% current_user_friends.each do |friend| %>
+		    <tr>
+				<% if @user.id != friend.friend_id %>
+				 <td>
+				 	<%= find_user_by_friend_id(friend.friend_id).name %>
+				 </td>		
+				 <td>
+				  <%= link_to "#{is_user_in_group(friend.friend_id,@group) ? 'Remove' : 'Add'}",add_member_path(@group,friend.friend_id)%>
+				</td>
+				<% else %>
+				  <td>
+				  	<%= friend.user.name %>
+				  </td>
+				  <td>
+		          	<%= link_to "#{is_user_in_group(friend.user_id,@group) ? 'Remove' : 'Add'}",add_member_path(@group,friend.user_id)%>
+				  </td>
+				<% end %>
+			</tr>
+	    <% end %>
+		
+	</table>
+</div>
+
+
+</div>

@@ -1,0 +1,26 @@
+<center>
+<b> <%= flash[:notice] %> </b>
+<p>
+Group <font color = brown><%= @group.name %></font>
+</p>
+<p> <font color = brown><%= flash[:notice]%></font></p>
+<table border="1">
+	<tr>
+		<th> Members </th>
+	</tr>              
+	<% @group.users.each do |member| %>
+		<tr>
+			<% if member.id == current_user.id %>
+				<td>
+					<font color= red > You </font>
+				</td>
+			<% else %>
+				<td>
+					<%= member.name %>
+				</td>
+			<% end %>
+		
+		</tr>
+	<% end %>
+</table>
+</center>

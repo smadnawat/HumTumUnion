@@ -1,0 +1,39 @@
+
+<center>
+<h2> Unread messages </h1>
+ <% if @unread_messages.present? %>
+<table bordercolor=brown, border=1>
+  <tr >
+  
+    <th> Date </th>
+     <th> From </th>
+      <th>Individual/Group </th>
+    <th> Show </th>
+  </tr>
+ 
+  <% @unread_messages.each do |m| %>
+    <tr>
+     
+      <td><%= m.created_at.to_date %></td> 
+      <td><div class="comment_content"><%= m.user.name %></div></td>
+       <% if m.group_id != nil %>
+          <td><font color="red"> <%= m.group.name %> Group </font></td>
+          <td> <%= link_to ' Show ', new_group_message_path(m.user_id,m.group) ,:class => "links"%></td>
+       <% else %>
+          <td><font color="red">Individual</font></td>
+         <td> <%= link_to ' Show ', new_user_message_path(m.user_id) ,:class => "links"%></td>
+      <!-- <td><%#= link_to ' Delete ', user_message_path(@reciever,m),:class => "links", method: :delete,
+              data: { confirm: 'Are you sure?' } %>
+      </td> -->
+      <% end %>
+    </tr>
+  <% end %>
+  
+</table>
+<% else %>
+Not any new message
+<% end %>
+<br> 
+<br>
+<br>
+ </center>

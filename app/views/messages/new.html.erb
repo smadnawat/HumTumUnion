@@ -1,0 +1,32 @@
+
+<b><%= find_user(@reciever.id).name %></b><br><br>
+<%= flash[:notice] %><br>
+<%= form_for :message , url:  user_messages_path(@reciever) do |f| %>
+               
+           <%= f.text_field :content ,:size => 20, :placeholder => "Type your message here" %><br>
+            <%= f.label :image ,"Upload image" %>
+            <%= f.file_field :image %> <br><br>
+           <%= f.submit "Send" ,:id =>"comment",:class => "button"  %>
+ <% end %>
+<% if @all_old_messages.present? %><br><br>
+   <% @all_old_messages.each do |msg| %>
+    
+       <% if msg.user_id == current_user.id %>
+        <font color="green"><%= current_user.name %> :  sent at <%= msg.created_at.to_date %> </font>
+        <%= link_to ' Delete ', user_message_path(@reciever,msg),:class => "links", method: :delete,
+              data: { confirm: 'Are you sure?' } %>
+     <% else %>
+         <font color="3366FF"><%= find_user( msg.user_id ).name %> : sent at <%= msg.created_at.to_date %></font>
+     <% end %>
+     
+
+      <div class="comment_content">  <%= msg.content %> </div>
+        <% if msg.image.present? %>
+            <center> <%=image_tag msg.image , :size => "120x150" %> </center>
+       <% end %>
+
+   <% end %>
+<% else %>
+ <br><br>
+  <center> You have not any conversion with <%= find_user(@reciever.id).name %> yet.</center>
+<%end%>

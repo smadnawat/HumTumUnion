@@ -1,36 +1,21 @@
 
 <center>
-<h3>List of all users and their articles</h3>
+<h3> My Posts</h3>
  
 <table bordercolor=brown, border=1>
   <tr >
-
-    <th> Name </th>
-    <th> E-Mail </th>
-    <th> Event Title </th>   
-    <th> Event date </th>
-    <th> Status </th>
+    <th> Post</th>   
+    <th> Post date </th>
     <th> View </th>
    
   </tr>
  
   <% @article.each do |article| %>
     <tr>
-      <td><%= article.user.name %></td>
-      <td><%= article.user.email %> </td>
-      <td><b><%= article.title %></b></td>
+    
+      <td><b><%= article.about%></b></td>
       <td><b><%= article.date %></b></td>
       <!-- <td><%#= i.created_at.strftime('%d-%b-%Y at  %H:%M%p') %></td> -->
-      <% if article.date < @today %>
-       <td> <font color="red"> Past Event</font> </td>
-       <% elsif article.date == @today %>
-       <td> <font color="green">today's Event</font> </td>
-       <% elsif article.date <= @lastday && article.date > @today %>
-       <td> <font color="FF9900"> Comming</td></font>
-      <% else %>
-        <td> Not now </td>
-      <% end %>
-         
 
       <td><%= link_to ' Show ', usertitle_path(@user,article), :class => "links" %></td>
       
@@ -39,6 +24,5 @@
 </table>
 <br>
 <br>
-<%= link_to 'Home' , root_path(@user),:class => "links" %>
-<br>
+
  </center>

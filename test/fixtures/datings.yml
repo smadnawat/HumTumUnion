@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  datable_id: 1
+  date_id: 1
+  accept: false
+  dating_time: 2015-04-14 18:00:50
+
+two:
+  datable_id: 1
+  date_id: 1
+  accept: false
+  dating_time: 2015-04-14 18:00:50

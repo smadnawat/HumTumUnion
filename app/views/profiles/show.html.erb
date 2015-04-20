@@ -1,0 +1,74 @@
+
+   <% if @profile.image.to_s ==''%>
+        <% if @profile.user.gender == 'male' %>
+            <%= image_tag ("not_male.jpeg") , :size => "120x150" %> 
+         <% else %>
+            <%= image_tag ("not_female.jpeg") , :size => "120x150" %> 
+         <% end %>
+   <% else %>
+          <%= image_tag @profile.image , :size => "120x150" %> 
+   <% end %>
+<table border = "1" bordercolor ="brown" width="100%" class="display: inline">
+	<tr>
+		<th> Name </th>
+		<td> <%= @user.name %> </td>
+	</tr>
+	<tr>
+		<th> Email </th>
+	    <td> <%= @user.email %> </td>
+		
+	</tr>
+	<tr>
+		<th> Birthday </th>
+		<td> <%= @user.dob %> </td>
+		
+	</tr>
+	 <tr>
+         <th> contact </th>
+         <td>  <%= @profile.contact %> </td>
+       </tr>
+
+       <tr>
+         <th> Status </th>
+         <td> <%=  @profile.status %> </td>
+       </tr>
+
+       <tr>
+         <th> About </th>
+         <td> <%=  @profile.about %></td>
+       </tr>
+        <tr>
+         <th>  Address  </th>
+         <td>  <%=  @profile.address %> </td>
+       </tr>
+        <tr>
+         <th>  Zipcode  </th>
+         <td>  <%=  @profile.zipcode %> </td>
+       </tr>
+       <tr>
+         <th> City/Town </th>
+         <td>  <%=  @profile.city%> </td>
+       </tr>
+        <tr>
+         <th> State </th>
+         <td>  <%=  @profile.state%> </td>
+       </tr>
+
+       <tr>
+         <th> Country</th>
+         <td> <%=  @profile.country %> </td>
+       </tr>
+
+       <tr>
+         <th> Hobby</th>
+         <td> <%=  @profile.hobby %></td>
+       </tr>
+    
+       <tr>
+
+</table>
+
+<% if @user.id == current_user.id %>
+<P> <%= link_to 'Edit profile' , edit_user_profile_path(@user,@profile) , :class => "links" %> </P>
+<% end %>
+

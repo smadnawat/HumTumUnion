@@ -1,0 +1,36 @@
+<center>
+<b> <%= flash[:notice] %> </b>
+<p>
+Group <font color = brown><%= @group.name %></font>
+</p>
+<%= link_to 'Add member' , add_group_member_path(@user,@group) ,:class=>"like_button"%>
+<%= link_to 'Send Message' , new_group_message_path(@user,@group) ,:class=>"like_button"%>
+<%#= link_to 'Delete' ,  user_group_path(@user,@group), :class => "links", method: :delete,
+              data: { confirm: 'Are you sure?' } %>
+<p> <font color = brown><%= flash[:notice]%></font></p>
+<table border="1">
+	<tr>
+		<th> Group Members </th>
+		<th> Remove Members </th>
+	</tr>              
+	<% @group.users.each do |member| %>
+		<tr>
+			<% if member.id == current_user.id %>
+				<td>
+					<font color= red > You </font>
+				</td>
+				<td>
+				</td>
+			<% else %>
+				<td>
+					<%= member.name %>
+				</td>
+				<td>
+					 <%= link_to 'Remove',add_member_path(@group,member.id)%>
+				</td>
+			<% end %>
+		
+		</tr>
+	<% end %>
+</table>
+</center>

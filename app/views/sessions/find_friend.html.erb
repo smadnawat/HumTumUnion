@@ -1,0 +1,24 @@
+find friend
+<br>
+<%= flash[:notice] %>
+<br>
+<% if @find_friends.count != 0 %>
+<table border="1">
+<% @find_friends.each do |friend| %>
+<tr>
+	<td>
+	 <%= friend.name %>
+	</td>
+	 <td> 
+		  	<%= link_to 'View Profile' , profile_path(friend.id) ,:class => "links"%>
+	</td>
+	<td>
+		    <%= link_to "Send request", send_request_path(@user,friend),:class => "links"  %>
+	</td>
+</tr>
+<% end %>
+</table>
+<% else %>
+There is not any new person at this app <br>
+<% end %>
+<br>

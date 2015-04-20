@@ -1,0 +1,38 @@
+<br><br>Block List <br>
+<%= flash[:notice] %>
+<br>
+<% if @blocked_request.count != 0  %>
+<table border="1">
+	<tr>
+	    <th> Name </th>
+	    <th> Status </th>
+	    <th> Unblock </th>
+	</tr>
+    <% @blocked_request.each do |request| %>
+    <tr>
+		<% if @user.id != request.friend_id %>
+		 <td>
+		 	<%= find_user_by_friend_id(request.friend_id).name %>
+		 </td>
+		<% else %>
+		  <td>
+		  	<%= request.user.name %>
+		  </td>
+		<% end %>
+		<td>
+		  <% if request.accept == "true" %>
+		   Friend
+		  <% else %>
+		  	<%= link_to 'Accept',accept_request_path(@user,request)%>
+		  <% end %>
+		</td>
+		<td>
+		 <%= link_to 'Unblock',unblock_path(@user,request),data:{ confirm:'Are you sure you want to unblock this person?'}%>
+		</td>
+	</tr>
+    <% end %>
+</table>
+<% else %>
+You have not unblocked anyone.<br>
+<% end %>
+

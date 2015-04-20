@@ -1,0 +1,19 @@
+
+<h3>Request for Datings</h3><br><br>
+<font color="red"> <%= flash[:notice]%></font>
+<table border = 1>
+<tr>
+	<th>Request from</th>
+	<th>Date of dating</th>
+	<th>Accept</th>
+	<th>Reject</th>
+</tr>
+<% @dating.each do |date| %>
+<tr>
+	<td> <%= date_request(date.datable_id) %></td>
+	<td><%= date.time_of_dating %> </td>
+	<td> <%= link_to "Accept", accept_date_path(date.datable_id,date.time_of_dating) %></td>
+	<td> <%= link_to "Reject", user_dating_path(current_user,date.time_of_dating), method: :delete %></td>
+</tr>
+<% end %>
+</table>

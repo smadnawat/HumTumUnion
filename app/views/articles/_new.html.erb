@@ -1,0 +1,12 @@
+
+<%= form_for Article.new, url: user_articles_path(current_user.id) do |f| %>
+ <font color=red><%= flash[:warning] %></font>
+  <p>
+  <%= f.text_area :about,:align => 'center',:size => 20 ,:placeholder => "share with your friends Whats in your mind ?" %><br>
+    <%= f.label :image ,"Upload image" %>
+    <%= f.file_field :image %>
+  </p>
+  <p>
+    <%= f.submit  "Post" , :class => "button" %>
+  </p>
+  <% end %>

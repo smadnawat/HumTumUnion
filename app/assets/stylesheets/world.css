@@ -1,0 +1,420 @@
+* {
+  box-sizing: border-box;
+}
+html,
+body {
+  padding: 0;
+  margin: 0;
+  height: 100%;
+    width: 100%;
+overflow-y:hidden;
+}
+.main
+{
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  padding-right: 15px;
+}
+
+.header_bar 
+{
+  position: fixed;
+  width: 100%;
+  height: 10%;
+  padding: 0.7%;
+  background-color: #218C8D ;
+}
+.welcome
+{
+  text-align: center;
+  overflow: hidden;
+  background-color: white;
+  margin-right:2%;
+  margin-left: 0.7%;
+  padding:  1%;
+  width: 11%;
+  font-size: 100%;
+  display: inline-block;
+}
+.profile_pic
+{
+  overflow: hidden;
+   display: inline-block;
+   /*padding: 2% 0%;*/
+    height: 100%;
+    margin-top: 0;
+    width: 4%;
+     border-radius: 30px;
+    background-color: white;
+}
+.name_plate 
+{
+  text-align: center;
+  overflow: hidden;
+  background-color: white;
+  margin-right:2%;
+  padding: 0.8%;
+  width: 28%;
+  font-size: 80%;
+  display: inline-block;
+}
+
+.header_content 
+{
+  overflow: hidden;
+  background-color: #6CCECB;
+  color : white;
+  text-align: center;
+  padding: 0.2%;
+  border-radius: 9px;
+  width: 7.5%; 
+  display: inline-block;
+}
+
+.header_content a 
+{
+   color: white;
+  text-decoration: none;
+}
+
+
+.header_content:hover 
+{
+ color: white;
+
+  background-color: #989898;
+}
+
+
+
+
+.logout 
+{
+    color : white;
+  text-align: center;
+  float: right;
+  margin-top: 1%;
+   width: 4.5%; 
+  display: inline-block;
+ }
+
+
+.left_bar
+{
+  position: fixed;
+  margin-top: 5.2%;
+  margin-left: 0%;
+  padding: 1% 1%;
+  width: 18%;
+  height: 100% ;
+  border-top:1px solid green ;
+  background-color: #218C8D;
+}
+.left_bar_item
+{
+  overflow: hidden;
+  display: block;
+  margin-top: 2%;
+  margin-left: 0.2%;
+  padding: 1%;
+  width: 95%;
+  height: 4vh;
+  font-size: 100%;
+  border-radius: 5px;
+  text-align: center;
+  color : white;
+  background-color: #6CCECB;
+}
+.left_bar_item a
+{ overflow: hidden;
+   width: 98%;
+  height: 5vh;
+  font-size: 100%;
+  display: block;
+}
+.left_bar_item:hover
+{
+  color: white;
+  background-color: #505050;
+}
+.left_bar_links
+{
+   color :white;   
+  text-decoration: none;
+}
+.left_bar_links:hover
+ {
+  color: #00FF66;
+ }
+
+.right_scroll_bar
+ {
+  position: fixed;
+  margin-top: 21%;
+  margin-left: 85%;
+  width: 15%;
+  height: 60vh;
+  border: 1px solid black;
+  overflow: scroll;
+  background-color: #C3E4ED;
+}
+
+.content
+{
+   margin-top: 7%;
+   display: inline-block;
+}
+/*signup*/
+
+
+  .button
+  {
+    text-decoration: none;
+    background-color: green ;
+    border-radius:15px ;
+    font-size: 80%;
+    color: white;
+
+  }
+ .button:hover
+ {
+   background-color: white ;
+    color: green;
+ }
+
+ .links
+ {
+  color :brown;   
+  text-decoration: none;
+ }
+ .links:hover
+ {
+  color: #00FF66;
+ }
+
+ 
+.header-wrapper
+ {
+  background-color:green;
+  text-align: justify;
+  color:white;
+  width:100%;
+  height: 10vh;
+  z-index:999;
+ }
+
+ .footer
+ {
+
+  background-color:green;
+  width:100%;
+  color:white;
+  text-align:center;
+  height:5%;
+  margin-top:15%;
+ }
+
+table.wide-table { width:50%; }
+
+
+.right_bar_item
+{
+
+  overflow: hidden;
+  display: block;
+  margin-top: 2%;
+  margin-left: 0.2%;
+  padding: 1%;
+  width: 95%;
+  height: 4vh;
+  font-size: 100%;
+  text-align: center;
+  color : white;
+  background-color: #7A8B8B;
+}
+.right_bar_item a
+{ overflow: hidden;
+  text-decoration: none;
+  color : white;
+   width: 98%;
+  height: 5vh;
+  font-size: 100%;
+  display: block;
+}
+.right_bar_item:hover
+{
+  color: white;
+  background-color: #505050;
+}
+.right_bar_single_item
+{
+  overflow: hidden;
+  display: block;
+  margin-top: 0%;
+  margin-left: 0.2%;
+  padding: 1%;
+  width: 95%;
+  height: 4vh;
+  font-size: 100%;
+  text-align: center;
+  color : white;
+  background-color: #00868B;
+}
+.right_bar_blank_item
+{
+  overflow: hidden;
+  display: block;
+  margin-top: 1%;
+  margin-left: 0.2%;
+  padding: 1%;
+  width: 95%;
+  height: 4vh;
+  font-size: 100%;
+  text-align: center;
+  color : white;
+  background-color: #05B8CC ;
+}
+
+.comment_content
+{
+  max-width: 300px; /*or whatever*/
+  word-wrap: break-word;
+}
+
+.like_button
+{
+    text-decoration: none;
+    border: 1px solid green;
+    border-radius:10px;
+    color: #336600;
+    font-size: 100%;
+    text-align: center;
+}
+.like_button a
+{
+    font-size: 80%;
+}
+ .like_button:hover
+ {
+   background-color: green ;
+    color: white;
+ }
+/*******************HOME SCREEN*************************************************************/
+/*.signup_login_button
+{
+  width: 200px;
+  height: 35px;
+  color: white;
+  background-color: #FF5930;
+  position: absolute;
+  text-decoration: bold;
+  border-radius: 10px;
+  float: right;
+}
+.signup_login_button:hover
+{
+  background-color: #E64016;
+}
+*/
+.content1
+{
+  float: left;
+  margin-left: 4.5%;
+  background-repeat: no-repeat;
+  background-size: contain;
+  position: fixed;
+  margin-top: 10%;
+  position: absolute;
+  width: 25%;
+  height: 43%;
+  background-image: url(togather.png);
+}
+.content2
+{
+  float: left;
+  margin-left: 36%;
+  background-repeat: no-repeat;
+  background-size: contain;
+  position: absolute;
+  margin-top: 10%;
+  width: 20%;
+  height: 60%;
+  border-radius: 35%;
+  background-image: url(collaboration.jpeg);
+}
+.content3
+{
+  margin-top: 25%;
+  float: left;
+  margin-left: 5%;
+  background-repeat: no-repeat;
+  background-size: contain;
+  width: 28%;
+  height: 45%;
+  background-image: url(77ed932a23.jpeg);
+}
+.request_logo
+{
+  color : white;
+  text-align: center;
+  width: 4.5%; 
+  display: inline-block;
+}
+.landing_header
+{
+  width: 100%;
+  height: 12%;
+  float: left;
+  /*padding-top: 33px;*/
+  background-color: black;
+  background-repeat: no-repeat;
+  background-size:cover;
+  color: white;
+  position: fixed;
+}
+.landing_footer
+{
+  width: 100%;
+  height: 8%;
+  float: left;
+  bottom: 0px;
+  background-color: black;
+  background-repeat: no-repeat;
+  background-size:cover;
+  color: white;
+  position: fixed;
+
+}
+
+
+.landing_header_logo
+{
+  width: 17%;
+  height: 100%;
+  background-image: url(htunew.jpg);
+  background-repeat: no-repeat;
+  background-size: contain;
+  float: left;
+}
+.sign_in_header
+{
+  padding-top: 1.8%;
+  width: 30%;
+  height: 100%;
+  margin-left: 1px;
+  /*background-color: black;*/
+  float: right;
+  display: inline-block;
+}
+.landing_sign_up
+{
+  width: 21%;
+  height: 50%;
+  float: right;
+  background-color: #4C1A4C;
+  margin-top: 10%;
+  border-right: 100px;
+  border-radius: 12%;
+  padding-top: 1.5%;
+}
