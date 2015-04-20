@@ -7,7 +7,7 @@ gem 'geocoder'
 #gem 'sqlite3'
  gem "pg"
 
- #gem 'rails_12factor', group: :production
+ gem 'rails_12factor', group: :production
 
 # Use SCSS for stylesheets
 
