@@ -354,6 +354,14 @@ table.wide-table { width:50%; }
   height: 45%;
   background-image: url(77ed932a23.jpeg);
 }
+
+.content4
+{
+   margin-top: 34%;
+  float: left;
+  margin-left: 4%;
+
+}
 .request_logo
 {
   color : white;
