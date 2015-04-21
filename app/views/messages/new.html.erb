@@ -31,7 +31,14 @@
             <center> <%= cl_image_tag( msg.image, :width => 170, :height => 200, :crop => :fill) %> </center>
        <% end %>
  
-       <font size=2% color="red"> sent at <%= msg.created_at.to_date %></font>
+       <font size=3% color="red"> sent at <%= msg.created_at.to_date %></font>
+       <% if msg.user_id == current_user.id %>
+           <% if msg.unread == "read" %>
+                <font size=3% color="grey"> Seen </font>
+            <% else %>
+                  <font size=3% color="grey"> Not seen </font>
+            <% end %>
+        <% end %>
        <br>
 
    <% end %>
