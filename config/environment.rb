@@ -6,8 +6,8 @@ Signup::Application.initialize!
 
 
 ActionMailer::Base.smtp_settings = {
-  :user_name => 'jairajput.kiet@gmail.com',
-  :password => 'Mobiloitte1',
+  :user_name => 'humtumunion@gmail.com',
+  :password => 'humtumunion@htu',
   :domain => 'gmail.com',
   :address => 'smtp.gmail.com',
   :port => 587,

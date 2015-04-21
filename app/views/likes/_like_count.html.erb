@@ -1,7 +1,7 @@
 
 
         <div style="text-align:left; margin-left:30%">
-        <%= link_to "#{is_like(articlee, current_user) ? 'UnLike' : 'Like'}" , like_it_path(:article_id => articlee.id, :user_id => current_user.id ), :remote=> true  ,  :class => "like_button"%>
+        <%= link_to "#{is_like(articlee, current_user) ? 'UnLike' : 'Like'}" , like_it_path(:article_id => articlee.id, :user_id => current_user.id ), :remote=> true  ,  :class => "button"%>
        <span id= "like_count" style ="margin-left:3%;"><%= pluralize(article_total_likes(articlee.id).count, "Like") %></span>
        <div style="margin-left:2%; display: inline;"><%= link_to 'Show' , article_likes_path(articlee), :class => "links" %></div>
 

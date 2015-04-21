@@ -35,7 +35,7 @@ class MessagesController < ApplicationController
 	def new_group_message
         @sender = User.find(params[:sender]) 
         @group = Group.find(params[:id])
-        @old_group_messages = @group.messages
+        @old_group_messages = @group.messages.order("created_at desc")
 		 @current_user_messages = Message.where("user_id != ? and unread = ? and group_id = ?",current_user.id,'unread',@group.id)
 
  		 @current_user_messages.each do |m|
@@ -50,7 +50,7 @@ class MessagesController < ApplicationController
         @message = params[:group_message][:content]
 	    @image = params[:group_message][:image]
 		   if @message != '' or @image != nil
-			   @message = @sender.messages.create(:content => params[:group_message][:content],:group_id => @group.id,:image => params[:group_message][:image] , :unread => "unread")
+			   @message = current_user.messages.create(:content => params[:group_message][:content],:group_id => @group.id,:image => params[:group_message][:image] , :unread => "unread")
 			   if !@message
 			   	 flash[:notice] = "Something wrong"
 		         render new_group_message_path(@sender,@group)

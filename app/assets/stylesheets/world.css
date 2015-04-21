@@ -172,15 +172,15 @@ overflow-y:hidden;
   {
     text-decoration: none;
     background-color: green ;
-    border-radius:15px ;
-    font-size: 80%;
+    border-radius:5px ;
+    font-size: 90%;
     color: white;
 
   }
  .button:hover
  {
    background-color: white ;
-    color: green;
+   color: green;
  }
 
  .links

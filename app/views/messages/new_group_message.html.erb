@@ -1,28 +1,32 @@
 Group : <%= @group.name %><br><br>
 <%= flash[:notice] %><br>
 <%= form_for :group_message , url:  group_message_path(@sender,@group) do |f| %>               
-           <%= f.text_field :content ,:size => 20, :placeholder => "Type your message here" %><br>
-            <%= f.label :image ,"Upload image" %>
-            <%= f.file_field :image %> <br><br>
-           <%= f.submit "Send" ,:id =>"comment",:class => "button"  %>
+           <%= f.text_field :content ,:size => 20, :placeholder => "Type your message here" %> <%= f.submit "Send" ,:id =>"comment",:class => "button"  %><br>
+            <%#= f.label :image ,"Upload image" %>
+            <%= f.file_field :image %> 
+          
  <% end %>
-<% if @old_group_messages.present? %><br><br>
+<% if @old_group_messages.present? %><br>
    <% @old_group_messages.each do |msg| %>
-    
-       <% if msg.user_id == current_user.id %>
-		    <font color="green"><%= current_user.name %> :  sent at <%= msg.created_at.to_date %> </font>
-		    <%= link_to ' Delete ', user_message_path(@sender,msg),:class => "links", method: :delete,
-              data: { confirm: 'Are you sure?' } %>
-		 <% else %>
-		     <font color="3366FF"><%= find_user( msg.user_id ).name %> : sent at <%= msg.created_at.to_date %></font>
-		 <% end %>
+    <br>
+     <div class="comment_content">
+           <% if msg.user_id == current_user.id %>
+    		    <font color="green">You</font>
+            : <%= msg.content %> 
+                     <%= link_to ' Delete ', user_message_path(@reciever,msg),:class => "links", method: :delete,
+                  data: { confirm: 'Are you sure?' } %>
+    		   <% else %>
+    		     <font color="3366FF"><%= find_user( msg.user_id ).name %> :</font>
+             <%= msg.content %>
+    		   <% end %>
 		 
 
-      <div class="comment_content">  <%= msg.content %> </div>
+     </div>
         <% if msg.image.present? %>
-            <center> <%=image_tag msg.image , :size => "120x150" %> </center>
+            <center> <%= cl_image_tag( msg.image, :width => 170, :height => 200, :crop => :fill) %> </center>
        <% end %>
-
+       <font size=2% color="red"> sent at <%= msg.created_at.to_date %></font>
+       <br>
    <% end %>
 <% else %>
  <br><br>

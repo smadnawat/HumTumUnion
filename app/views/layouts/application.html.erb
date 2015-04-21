@@ -54,7 +54,7 @@
                         <%= image_tag ("not_female.jpeg") , :size => "70x91" %> 
                      <% end %>
                <% else %>
-                      <%= image_tag current_user.profile.image , :size => "70x91" %> 
+                      <%= cl_image_tag( current_user.profile.image, :width => 70, :height => 92, :crop => :fill) %>
                <% end %>
             </div>
             <div class="welcome">Welcome </div>
@@ -220,7 +220,7 @@
 <p>
 <%= f.submit "Sign up"  ,:class => "button" %>
 </p>
-<%= link_to "Did'nt recieve confirmation", new_user_confirmation_path , :class => 'left_bar_links' %>
+<%#= link_to "Did'nt recieve confirmation", new_user_confirmation_path , :class => 'left_bar_links' %>
 <% end %> 
 </center>
 <script>

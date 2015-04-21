@@ -1,5 +1,5 @@
 Signup::Application.routes.draw do
-  devise_for :users
+ devise_for :users, :controllers => { :registrations => "registrations" }
   get "comments/new"
   get "sessions/new"
   get "users/new"

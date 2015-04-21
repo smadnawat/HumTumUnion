@@ -44,6 +44,7 @@ end
 # Use unicorn as the app server
 # gem 'unicorn'
 gem 'carrierwave'
+gem 'cloudinary'
 
 gem 'devise'
 
@@ -56,6 +57,8 @@ gem 'bootstrap-datepicker-rails', :require => 'bootstrap-datepicker-rails',
                               :git => 'git://github.com/Nerian/bootstrap-datepicker-rails.git'
 
 gem 'quiet_assets', group: :development
+
+
 # gem 'protected_attributes'
 # Use Capistrano for deployment
 # gem 'capistrano', group: :development
