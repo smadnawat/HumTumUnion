@@ -67,7 +67,9 @@ Signup::Application.routes.draw do
 
   get "new_group_message/:sender/group/:id" => 'messages#new_group_message',:as => 'new_group_message'
   post'group_message/:sender/group/:id' => 'messages#group_message',:as =>'group_message' 
-
+  post 'search_people' => 'sessions#search_people',:as => 'search_people'
+  get 'sent_request' => 'sessions#sent_request',:as =>  'sent_request'
+ 
   # get '/update_inbox/:id' => 'messages#update_inbox',:as => '/update_inbox'
   #get 'create_group/:id' => 'groups#create_group',:as => 'create_group'
 

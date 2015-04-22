@@ -9,6 +9,9 @@
           <%= cl_image_tag( @profile.image, :width => 120, :height => 150, :crop => :fill) %>
           <%#= image_tag @profile.image , :size => "120x150" %> 
    <% end %>
+   <% if is_friend(@user.id) %>
+      <%= link_to "Send request", send_request_path(current_user,@user),:class => "button"  %>
+   <% end %>
 <table border = "1" bordercolor ="brown" width="100%" class="display: inline">
 	<tr>
 		<th> Name </th>

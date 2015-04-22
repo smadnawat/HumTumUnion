@@ -56,17 +56,36 @@ module ApplicationHelper
     end
   end
 
+  def is_friend user
+    @find_friends = User.all_friends(current_user.id,"notfrields").pluck(:id)
+    @find_friends.include?(user) ? user : false 
+  end
+
+ def peaple_you_may_know user
+    @user = User.find(user)
+    @user_ids = User.where("id != ?",@user.id).pluck(:id)
+    @request = Friendship.where("user_id = ? or friend_id = ?",@user.id,@user.id) 
+    @friend_users = Array.new
+    temp = 0
+    @request.each do |request|
+      if request.user_id == @user.id
+        @friend_users[temp] = request.friend_id
+      else
+        @friend_users[temp] = request.user_id
+      end
+      temp += 1
+    end
+    @are_not_friends_ids = @user_ids.reject{ |e| @friend_users.include? e }
+    
+    @not_friends =  User.where("id IN (?)",@are_not_friends_ids)
+
+  end
+
   def find_friend friend
     if current_user.id != friend.friend_id
-      # @id = friend.friend_id
-      # @name= find_user_by_friend_id(friend.friend_id).name
-      # ValueHolder.new(@id, @name)
       { :id => friend.friend_id, :name => find_user_by_friend_id(friend.friend_id).name }
              
-    else    
-      # @id = friend.user_id
-      # @name= friend.user.name
-      # ValueHolder.new(@id, @name)    
+    else       
      { :id => friend.user_id, :name => friend.user.name }
     end
   end

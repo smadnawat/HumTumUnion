@@ -1,0 +1,51 @@
+<p> 
+<%= form_for :search_users , url: search_people_path , method: :post do |f| %>
+	<%= f.text_field :users ,:size => 12,:placeholder => "Search person by name"%>
+	<%= f.submit "Search" ,:class=>"button"%>
+<% end %> 
+</p>
+
+
+<% if @users.present? %>
+	<h3>Result</h3>
+	<table border= "1" bordercolor="brown">
+		<tr>
+			<th> Name </th>
+			<th> Send request </th>
+			<th> View Profile </th>
+		</tr>
+		<% @users.each do |person| %>
+				<tr>					
+					<% if person.id == current_user.id  %>
+						<td> 
+						  <font color= red> You </font>
+						</td>
+						<td> ------ </td>
+					<% else %>
+						<td>
+					 	 	<%= person.name %> 
+					 	</td>
+					 	<td>
+					 		<% if is_friend(person.id) %>
+					 		   <%= link_to "Send request", send_request_path(current_user,person),:class => "links"  %>
+					 		<% else %>
+					 		  Already in Friendlist
+					 		 <% end %>
+					 	 </td>
+					<% end %>	
+
+					   <td>
+					   	<%= link_to "View profile",profile_path(person) ,:class => "links"%>
+					   </td>		
+				</tr>
+		
+		<% end %>
+
+	</table>
+<% else %>
+	 <br>____________________________________________________________________</br><br>
+		<font color="red">Person not found : May be first letter in uppercae or lowercase.</font>
+	 <br>____________________________________________________________________</br>
+<% end %>
+
+</center>

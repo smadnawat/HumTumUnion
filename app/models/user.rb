@@ -64,5 +64,28 @@ class User < ActiveRecord::Base
   def updatepassword newpassword,confirmpassword
    self.update_attributes(:password => newpassword, :password_confirmation => confirmpassword)
   end
+
+   def self.all_friends user,friendOrNotfriend
+    @user = User.find(user)
+    @user_ids = User.where("id != ?",@user.id).pluck(:id)
+    @request = Friendship.where("user_id = ? or friend_id = ?",@user.id,@user.id) 
+    @friend_users = Array.new
+    temp = 0
+    @request.each do |request|
+      if request.user_id == @user.id
+        @friend_users[temp] = request.friend_id
+      else
+        @friend_users[temp] = request.user_id
+      end
+      temp += 1
+    end
+    @are_not_friends_ids = @user_ids.reject{ |e| @friend_users.include? e }
+    
+    if (friendOrNotfriend == "friends")
+      @friends = User.where("id NOT IN (?)",@are_not_friends_ids)
+    else
+      @not_friends =  User.where("id IN (?)",@are_not_friends_ids)
+    end
+  end
  
 end

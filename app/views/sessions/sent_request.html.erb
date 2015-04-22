@@ -1,0 +1,30 @@
+
+<% if @sent_request.present? %>
+	<h3>Result</h3>
+	<table border= "1" bordercolor="brown">
+		<tr>
+			<th> Name </th>
+			<th> Cancel request </th>
+			<th> View Profile </th>
+		</tr>
+		<% @sent_request.each do |req| %>
+				<tr>
+					<td> 
+						<%= find_user_by_friend_id(req.friend_id).name %> 
+					</td>
+				 	<td>
+				 		 <%= link_to "Cancel request",  reject_request_path(current_user,req),:class => "links"  %>
+				 	 </td>
+				 	 <td>
+				 	 	<%= link_to "View Profile", profile_path(req.friend_id),:class => "links" %>
+				 	 </td>		
+				</tr>
+		
+		<% end %>
+
+	</table>
+<% else %>
+	 <br>____________________________________________________________________</br><br>
+		<font color="red">Not any pending request sent from you.</font>
+	 <br>____________________________________________________________________</br>
+<% end %>

@@ -45,22 +45,25 @@
   <div class="main">
     <% if current_user.present? %>
 
-        <div class="header_bar">
+        <div class="header_bar"> 
             <div class="profile_pic">  
                 <% if current_user.profile.image.to_s ==''%>
                     <% if current_user.gender == 'male' %>
-                        <%= image_tag ("not_male.jpeg") , :size => "70x91" %> 
+                        <%=link_to image_tag('not_male.jpeg' , :size => "70x91"),profile_path(current_user) %> 
                      <% else %>
-                        <%= image_tag ("not_female.jpeg") , :size => "70x91" %> 
+                        <%=link_to image_tag('not_female.jpeg' , :size => "70x91"),profile_path(current_user) %> 
                      <% end %>
                <% else %>
-                      <%= cl_image_tag( current_user.profile.image, :width => 70, :height => 92, :crop => :fill) %>
+                      <%=link_to cl_image_tag( current_user.profile.image, :width => 70, :height => 92, :crop => :fill) , profile_path(current_user)%>
                <% end %>
             </div>
-            <div class="welcome">Welcome </div>
+               <div class="request_logo">
+                 <%= link_to image_tag('search.png',:size => "30x30"), find_friend_path(current_user),:title =>  "Search People" %>
+            </div>
+            <div class="header_logo"> </div>
             <div class = "name_plate">
-              Hello <font color="green" ><%= current_user.name %> <br>
-              <%= current_user.email %></font>
+              Hello <%= current_user.name %> <br>
+              <b><%= current_user.email %></b>
             </div>
             <div class="request_logo">
             <%= link_to image_tag('request.png',:size => "30x30"), show_request_path(current_user),:title =>  "Friend request" %>
@@ -84,9 +87,7 @@
            <!--  <div class="request_logo">
             <%#= link_to image_tag('notification.png',:size => "30x30"), find_friend_path(current_user),:title =>  "Notifications" %>
             </div> -->
-             <div class="request_logo">
-            <%= link_to image_tag('search.png',:size => "30x30"), find_friend_path(current_user),:title =>  "Search People" %>
-            </div>
+          
 
             <div class="logout">
                <%= link_to image_tag('logout.png',:size => "40x40"),  destroy_user_session_path, method: :delete,:title =>  "Logout" %>
@@ -97,30 +98,39 @@
                 <div class="left_bar_item">
                 <%= link_to 'Home' , root_path(current_user) ,:class => "left_bar_links" %>
                 </div>
+                 <div class="left_bar_item">
+                    <%= link_to 'Inbox', inbox_path(current_user),:class => "left_bar_links" %>
+                </div>
+                <div class="left_bar_item">
+                    <%= link_to "My Profile",  profile_path(current_user),:class => "left_bar_links" %>
+                </div>
+                 <div class="left_bar_item">
+                    <%= link_to 'My Dates',new_user_dating_path(current_user),:class => "left_bar_links" %>
+               </div> 
                 <div class="left_bar_item">
                   <%= link_to "Friend list",friend_list_path(current_user),:class => "left_bar_links" %>
                 </div>
+                 
+                
+                 <div class="left_bar_item">
+                    <%= link_to 'Sent request' , sent_request_path(current_user) ,:class => "left_bar_links" %>
+                 </div>
                  <div class="left_bar_item">
                     <%= link_to 'Blocked list' , block_list_path(current_user) ,:class => "left_bar_links" %>
                  </div>
-                  <div class="left_bar_item">
-                    <%= link_to 'Inbox', inbox_path(current_user),:class => "left_bar_links" %>
-                </div>
-               <div class="left_bar_item">
-                    <%= link_to 'My Dates',new_user_dating_path(current_user),:class => "left_bar_links" %>
-               </div> 
                 <div class="left_bar_item">
                     <%= link_to 'Manage Posts',user_articles_path(current_user),:class => "left_bar_links" %>
                 </div>
                  <div class="left_bar_item">
-                    <%= link_to 'Create Group', new_user_group_path(current_user),:class => "left_bar_links" %>
-                </div>
-                 <div class="left_bar_item">
                     <%= link_to 'My Groups',user_groups_path(current_user),:class => "left_bar_links" %>
                 </div>
+                 <div class="left_bar_item">
+                    <%= link_to 'Create Group', new_user_group_path(current_user),:class => "left_bar_links" %>
+                </div>
+                
 
           
-                   <% if current_user.email == 'loveyhtu21@gmail.com' %>
+                   <% if current_user.email == 'humtumunion@gmail.com' %>
                     <div class="left_bar_item">
                      <%= link_to '*All Groups*',all_groups_path(current_user),:class => "left_bar_links" %>
                    </div>
@@ -130,13 +140,29 @@
                    <%end%>
 
 
-                 <div class="left_bar_item">
-                    <%= link_to "My Profile",  profile_path(current_user),:class => "left_bar_links" %>
-                </div>
+                 
                  <div class="left_bar_item">
                     <%= link_to "Change Password", setting_path(current_user),:class => "left_bar_links" %>
                 </div>
           </div> 
+           <div class="right_people_bar">
+                <div class="right_bar_single_item">
+                   People you may know
+                </div>
+
+                 <% if  peaple_you_may_know(current_user.id).present? %>
+                   <% peaple_you_may_know(current_user.id).each do |friend| %> 
+                     <div class="right_bar_item">
+                       <%= link_to "#{friend.name}" ,profile_path(friend.id),:class => "links" %>              
+                      </div>
+                   <% end %>
+               <% else %>
+                <div class="right_bar_blank_item">
+                    Not any Friend
+                </div>
+               <% end %>
+          </div>
+          
           <div class="right_scroll_bar">
             <div class="right_bar_single_item">
                 Friend List
@@ -147,11 +173,9 @@
 
                      <div class="right_bar_item">
                         <% if current_user.id != friend.friend_id %>
-                            <%#= link_to "#{find_user_by_friend_id(friend.friend_id).name }",profile_path(find_user_by_friend_id(friend.friend_id).id ) ,:class => "left_bar_links" %>
                              <%= link_to "#{find_user_by_friend_id(friend.friend_id).name }" ,new_user_message_path(find_user_by_friend_id(friend.friend_id).id),:class => "left_bar_links" %>
                           <% else %>
-                                 <%#= link_to "#{friend.user.name }",new_user_message_pathprofile_path(friend.user.id),:class => "left_bar_links" %>
-                                  <%= link_to "#{friend.user.name }",new_user_message_path(friend.user_id),:class => "left_bar_links" %>
+                                <%= link_to "#{friend.user.name }",new_user_message_path(friend.user_id),:class => "left_bar_links" %>
                           <% end %>
                       </div>
                  <% end %>
@@ -175,11 +199,9 @@
        </center>
     <% else %>
   <!-- ##################################-Header-###################################### -->
-  <% if !current_user %>
     <div class="landing_header">
     <a href="/">
-      <div class="landing_header_logo">
-      </div>
+      <div class="landing_header_logo"> </div>
     </a>  
 
       <div class="sign_in_header">
@@ -237,7 +259,6 @@
      <div class="landing_footer">
         <center>  <p>Copyright © 2015 || All rights are Reserved</p>  </center>
     </div>
-    <% end %>
     <% end %>
 
 

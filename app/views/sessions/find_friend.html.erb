@@ -1,6 +1,14 @@
-find friend
-<br>
-<%= flash[:notice] %>
+<p> 
+<%= form_for :search_users , url: search_people_path , method: :post do |f| %>
+	<%= f.text_field :users ,:size => 12,:placeholder => "Search person by name"%>
+	<%= f.submit "Search" ,:class=>"button"%>
+<% end %> 
+</p>
+
+
+<center> <font color= "brown"> People you may know </font></center>
+<br><br>
+<font color= "green"><%= flash[:notice] %></font>
 <br>
 <% if @find_friends.count != 0 %>
 <table border="1">

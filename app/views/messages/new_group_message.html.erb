@@ -6,36 +6,70 @@ Group : <%= @group.name %><br><br>
             <%= f.file_field :image %> 
           
  <% end %>
-<% if @old_group_messages.present? %><br>
-   <% @old_group_messages.each do |msg| %>
-    <br>
-     <div class="comment_content">
-           <% if msg.user_id == current_user.id %>
-    		    <font color="green">You</font>
-            : <%= msg.content %> 
-                     <%= link_to ' Delete ', user_message_path(@reciever,msg),:class => "links", method: :delete,
-                  data: { confirm: 'Are you sure?' } %>
-    		   <% else %>
-    		     <font color="3366FF"><%= find_user( msg.user_id ).name %> :</font>
-             <%= msg.content %>
-    		   <% end %>
-		 
 
-     </div>
-        <% if msg.image.present? %>
-            <center> <%= cl_image_tag( msg.image, :width => 170, :height => 200, :crop => :fill) %> </center>
-       <% end %>
-       <font size=2% color="red"> sent at <%= msg.created_at.to_date %></font>
-        <% if msg.user_id == current_user.id %>
-           <% if msg.unread == "read" %>
-                <font size=3% color="grey"> Seen </font>
-            <% else %>
-                  <font size=3% color="grey"> Not seen </font>
-            <% end %>
-        <% end %>
-       <br>
-   <% end %>
+
+<% if @old_group_messages.present? %><br>
+    <table style=" border-spacing:0 10px;">
+         <% @old_group_messages.each do |msg| %>
+            <tr>
+                <% if msg.user_id == current_user.id %>
+                <td></td>
+                  <td style="background-color:#aaaaaa;border-radius:20px 20px 0px 20px;color:white; padding:10px"> 
+                    <div class = "my_message" >
+                      <div class="comment_content">
+                          <font color="green"> &nbsp;You  </font>
+                           : <%= msg.content %> <br>
+                             <% if msg.image.present? %>
+                                  <center> <%= cl_image_tag( msg.image, :width => 170, :height => 200, :crop => :fill) %> </center>
+                             <% end %>
+                       
+                             <font size=2 color="black" %> sent at <%= msg.created_at.to_date %></font>
+                            
+                                <%= link_to 'Remove', user_message_path(@reciever,msg),:class => "links", method: :delete,
+                          data: { confirm: 'Are you sure?' } %>
+
+                           <% if msg.user_id == current_user.id %>
+                                 <% if msg.unread == "read" %>
+                                      <font size=3% color="#75675E"> Seen </font>
+                                  <% else %>
+                                        <font size=3% color="#75675E"> Not seen </font>
+                                  <% end %>
+                              <% end %>
+                              <br>
+                        </div>    
+                    </div>
+                  </td>
+                   <% else %>
+                      <td style="background-color:#cccccc;border-radius:0px 20px 20px 20px;color:#8B5A2B;padding:10px">
+                       <div class = "other_message" >
+                            <div class="comment_content">
+                                <font color="blue">
+                                  <%= find_user( msg.user_id ).name %>
+                                </font>
+                                   : <%= msg.content %> 
+
+                                    <% if msg.image.present? %>
+                                          <center> <%= cl_image_tag( msg.image, :width => 170, :height => 200, :crop => :fill) %> </center>
+                                   <% end %>
+                                  <br>
+                                   <font size=2% color="black"> sent at <%= msg.created_at.to_date %></font>
+                                   <% if msg.user_id == current_user.id %>
+                                       <% if msg.unread == "read" %>
+                                            <font size=3% color="#c4cfce"> Seen </font>
+                                        <% else %>
+                                              <font size=3% color="#c4cfce"> Not seen </font>
+                                        <% end %>
+                                    <% end %>
+                                   <br>
+                              </div>
+                        </div>
+                    </td><td></td>     
+             <% end %>
+          </tr>
+     <% end %>
+  </table>
 <% else %>
  <br><br>
   <center> You have not any conversion in <%= @group.name %> group yet.</center>
 <%end%>
+

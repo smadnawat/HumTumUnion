@@ -30,24 +30,15 @@ class SessionsController < ApplicationController
 
   def find_friend
     @user = User.find(params[:id])
-    @user_ids = User.where("id != ?",@user.id).pluck(:id)
-    @request = Friendship.where("user_id = ? or friend_id = ?",@user.id,@user.id) 
-    @friend_users = Array.new
-    temp = 0
-    @request.each do |request|
-      if request.user_id == @user.id
-        @friend_users[temp] = request.friend_id
-      else
-        @friend_users[temp] = request.user_id
-      end
-      temp += 1
-    end
-    #@friendship_ids = Friendship.where("user_id = ?",@user.id,@user.id).pluck(:friend_id)
-    # p  "********fffff**********#{@friendship_ids.inspect}******************"
-    @are_not_friends_ids = @user_ids.reject{ |e| @friend_users.include? e }
-    #p  "********fffff**********#{@friendship_ids.inspect}******************"
-    @find_friends = User.where("id IN (?)",@are_not_friends_ids)
+    @find_friends = User.all_friends(@user.id,"notfrields")
   end
+
+
+  def search_people
+    @users = User.where('name LIKE ?', "%#{params[:search_users][:users]}%")
+  end
+
+
 
   def send_request
     @user = User.find(params[:id])
@@ -68,6 +59,10 @@ class SessionsController < ApplicationController
     else
        redirect_to show_request_path(@user), :notice => "something wrong"
     end
+  end
+
+  def sent_request
+    @sent_request = Friendship.where("user_id = ? and accept = ? ",current_user.id,"false")
   end
 
   def count_request
