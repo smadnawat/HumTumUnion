@@ -297,7 +297,7 @@ table.wide-table { width:50%; }
 .comment_content
 {
   max-width: 300px; /*or whatever*/
-  word-wrap: break-word;`
+  word-wrap: break-word;
 }
 
 .right_people_bar
