@@ -5,7 +5,8 @@ class UsersController < ApplicationController
       @request = Friendship.where("friend_id=? and accept = ? and block = ? ",current_user.id,"false","false")
       @friends = User.all_friends(current_user.id,"friends").pluck(:id) 	
      # @friends << current_user.id
-      @article = Article.where("user_id IN (?)",@friends ).order('created_at desc') 
+      @article = Article.order('created_at desc') 
+      #@article = Article.where("user_id IN (?)",@friends ).order('created_at desc') 
       @people_you_may_know = User.all_friends(current_user.id,"friends")
     end
   end

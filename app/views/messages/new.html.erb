@@ -4,7 +4,7 @@
 <%= form_for :message , url:  user_messages_path(@reciever) do |f| %>
                
            <%= f.text_field :content ,:size => 20, :placeholder => "Type your message here" %>
-            <%#= f.label :image ,"Upload image" %>  <%= f.submit "Send" ,:id =>"comment",:class => "button"  %>
+          <%= f.submit "Send" ,:id =>"comment",:class => "button"  %>
             <br>
             <%= f.file_field :image %> 
          

@@ -24,7 +24,6 @@
   <%= render @article.comments %>
  </td></tr>
   <tr><td>
-    <%#= render 'shared/error_messages' %>
      <%= form_for([@article, @article.comments.build]) do |f| %>
          
      <%= f.hidden_field :Commenter , :value => current_user.id , :readonly =>true %>

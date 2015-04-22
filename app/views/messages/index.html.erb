@@ -22,9 +22,7 @@
        <% else %>
           <td><font color="red">Individual</font></td>
          <td> <%= link_to ' Show ', new_user_message_path(m.user_id) ,:class => "links"%></td>
-      <!-- <td><%#= link_to ' Delete ', user_message_path(@reciever,m),:class => "links", method: :delete,
-              data: { confirm: 'Are you sure?' } %>
-      </td> -->
+   
       <% end %>
     </tr>
   <% end %>

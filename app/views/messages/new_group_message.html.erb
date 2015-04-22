@@ -2,7 +2,6 @@ Group : <%= @group.name %><br><br>
 <%= flash[:notice] %><br>
 <%= form_for :group_message , url:  group_message_path(@sender,@group) do |f| %>               
            <%= f.text_field :content ,:size => 20, :placeholder => "Type your message here" %> <%= f.submit "Send" ,:id =>"comment",:class => "button"  %><br>
-            <%#= f.label :image ,"Upload image" %>
             <%= f.file_field :image %> 
           
  <% end %>

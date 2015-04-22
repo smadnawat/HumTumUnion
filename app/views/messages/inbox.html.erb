@@ -13,9 +13,7 @@
      
       <td><%= c.name %></td> 
       <td> <%= link_to ' Show ', new_user_message_path(c.id) ,:class => "links"%></td>
-      <td><%#= link_to ' Delete ', delete_conversation_path(c.id),:class => "links", method: :delete,
-              data: { confirm: 'Are you sure?' } %>
-      </td>
+    
     </tr>
   <% end %>
   
