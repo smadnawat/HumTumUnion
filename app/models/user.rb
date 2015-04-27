@@ -68,7 +68,7 @@ class User < ActiveRecord::Base
    def self.all_friends user,friendOrNotfriend
     @user = User.find(user)
     @user_ids = User.where("id != ?",@user.id).pluck(:id)
-    @request = Friendship.where("user_id = ? or friend_id = ?",@user.id,@user.id) 
+    @request = Friendship.where("(user_id = ? or friend_id = ?) and accept = ?",@user.id,@user.id,"true") 
     @friend_users = Array.new
     temp = 0
     @request.each do |request|

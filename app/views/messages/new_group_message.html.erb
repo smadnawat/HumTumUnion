@@ -24,8 +24,7 @@ Group : <%= @group.name %><br><br>
                        
                              <font size=2 color="black" %> sent at <%= msg.created_at.to_date %></font>
                             
-                                <%= link_to 'Remove', user_message_path(@reciever,msg),:class => "links", method: :delete,
-                          data: { confirm: 'Are you sure?' } %>
+<%= link_to 'Remove', user_message_path(@reciever,msg),:class => "links", method: :delete, data: { confirm: 'Are you sure?' } %>
 
                            <% if msg.user_id == current_user.id %>
                                  <% if msg.unread == "read" %>

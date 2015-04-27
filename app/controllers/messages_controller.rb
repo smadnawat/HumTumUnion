@@ -13,22 +13,28 @@ class MessagesController < ApplicationController
 			m.save
 		end
 	end
-
-
+	
 	def create
 	   @reciever = User.find(params[:user_id]) 
 	   @message = params[:message][:content]
 	   @image = params[:message][:image]
+	   
 	   if @message != '' or @image != nil
 		   @message = current_user.messages.create(:content => params[:message][:content],:reciever => @reciever.id,:image => params[:message][:image] , :unread => "unread")
+			@current_user_messages =  current_user.messages.where("reciever = ? ",@reciever.id).pluck(:id)
+		    @reciever_messages = @reciever.messages.where("reciever = ? ",current_user.id).pluck(:id)
+			@all_old_messages_id = @current_user_messages + @reciever_messages
+			@all_old_messages = Message.where("id IN (?)",@all_old_messages_id).order("created_at desc")
 		   if !@message
 		   	 flash[:notice] = "Something wrong"
 	         render 'new'
 	       else
-	         redirect_to new_user_message_path(@reciever)
+	         respond_to do |format|
+      			  format.js{ render "create_message", :locals => {:reciever => @reciever , :all_old_messages => @all_old_messages} }
+     		 end
 	       end 
 	   else
-	        redirect_to new_user_message_path(@reciever)
+	     redirect_to :back
 	    end  	
 	end
 
@@ -78,7 +84,7 @@ class MessagesController < ApplicationController
 	end
 
 
-	def delete_conversion
+	def delete_conversation
 		@user = User.find(params[:id])
 		@send_messages = current_user.messages.where("reciever = ? ",@user.id)
 		@recieved_messages = @user.messages.where("reciever = ?",current_user.id)
@@ -89,9 +95,16 @@ class MessagesController < ApplicationController
 	end
 
 	def destroy
-		@user = User.find(params[:user_id])
+		@reciever = User.find(params[:user_id]) 
 		@message = 	Message.find(params[:id])
 	    @message.destroy
-	    redirect_to new_user_message_path(@user)
+	    @current_user_messages =  current_user.messages.where("reciever = ? ",@reciever.id).pluck(:id)
+		@reciever_messages = @reciever.messages.where("reciever = ? ",current_user.id).pluck(:id)
+	    @all_old_messages_id = @current_user_messages + @reciever_messages
+	    @all_old_messages = Message.where("id IN (?)",@all_old_messages_id).order("created_at desc")
+
+	     respond_to do |format|
+      			  format.js{ render "create_message", :locals => {:reciever => @reciever, :all_old_messages => @all_old_messages} }
+         end
 	end
 end

@@ -1,6 +1,7 @@
 
+<%= flash[:notice] %><br><br>
 <% if @sent_request.present? %>
-	<h3>Result</h3>
+	<h3>Sent Requests</h3>
 	<table border= "1" bordercolor="brown">
 		<tr>
 			<th> Name </th>
@@ -14,7 +15,7 @@
 					</td>
 				 	<td>
 				 		 <%= link_to "Cancel request",  reject_request_path(current_user,req),:class => "links"  %>
-				 	 </td>
+				 	</td>
 				 	 <td>
 				 	 	<%= link_to "View Profile", profile_path(req.friend_id),:class => "links" %>
 				 	 </td>		

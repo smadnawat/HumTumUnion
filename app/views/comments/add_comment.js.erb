@@ -1,2 +1,3 @@
 id = "<%= article.id%>"
 $('#comments_'+id).html("<%= j render :partial => 'comments/comments_count', :locals=> {:article => article , :comments => comments}  %>");
+$('#comment_comment_'+id).val('');

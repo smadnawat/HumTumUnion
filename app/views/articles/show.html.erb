@@ -1,25 +1,28 @@
 
-<center>
-<br><br>
 <p>
-  <strong>Event Title: </strong>
-  <%= @article.title %>
-</p>
- 
-<p>
-  <strong>About Event:</strong>
-  <%= @article.about %><br>
-</p>
-<p>
-  <strong>Date of Event: </strong>
-  <%= @article.date %>
-</p>
- 
-
+	<%= @article.about %><br>
+</p> 
+<% if @article.image? %>
 <%= image_tag @article.image , :size => "200x300" %><br><br>
+<% end %>
 
+<%= link_to ' Edit ', edit_user_article_path(@user,@article),:class => "links"  %>
+<p> <%= pluralize(article_total_likes(@article.id).count, "Like") %> 
+	<% if article_total_likes(@article.id).count !=0 %>
+	<%= link_to 'Show' , article_likes_path(@article), :class => "links" %>
+	<% end %>
+</p>
 
+<font color="660033"> <%= pluralize(article_comments(@article).count, "Comment") %></font><br>
+<div class="comment_content">   
+  <% @comments.each do |commentt| %>
+	<% if commentt.Commenter.to_i == current_user.id %>
+	<font color="green"><%= find_user(commentt.Commenter).name %> : </font>
+	<font color="333300"><%= commentt.comment %></font>
+	<% else %>
+	<font color="3366FF"><%= find_user(commentt.Commenter).name %> : </font>
+	<font color="666600"><%= commentt.comment %></font>
 
-<%= link_to ' Edit ', edit_user_article_path(@user,@article),:class => "links"  %> | 
+	<% end %><br>
 
- </center>
+	<% end %>

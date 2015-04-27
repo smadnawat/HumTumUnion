@@ -10,6 +10,11 @@ class AdminController < ApplicationController
    @users = User.user(current_user)
   end
 
+  def index_post
+    @user=User.get_user(current_user.id)    
+    @article = Article.user_articles(current_user.id)
+  end
+
   def all_groups
     @user = User.get_user(params[:id])
     @group= Group.all

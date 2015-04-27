@@ -16,3 +16,4 @@
 //= require_tree .
 //= require jquery-ui
 //= require bootstrap-datepicker
+//= require jquery.remotipart

@@ -9,6 +9,11 @@ body {
     width: 100%;
 overflow-y:hidden;
 }
+html {
+  font-family: sans-serif; /* 1 */
+  -ms-text-size-adjust: 100%; /* 2 */
+  -webkit-text-size-adjust: 100%; /* 2 */
+}
 .main
 {
   width: 100%;
@@ -24,8 +29,8 @@ overflow-y:hidden;
 {
   position: fixed;
   width: 100%;
-  height: 10%;
-  padding: 0.7%;
+  height: 12%;
+  padding: 0.3%;
   /*background-color: #218C8D ;*/
    background-image: url(header.png);
   /*background-repeat: no-repeat;*/
@@ -49,9 +54,8 @@ overflow-y:hidden;
    display: inline-block;
    margin-left:3%;
     height: 100%;
-    width: 80%;
     margin-top: 0;
-    width: 4.2%;
+    width: 5%;
      border-radius: 0px 20px;
     background-color: white;
 }
@@ -63,6 +67,7 @@ overflow-y:hidden;
   padding: 0.8%;
   width: 28%;
   font-size: 100%;
+  margin-bottom: 0.6%;
   color:white;
   display: inline-block;
     background-image: url(leftbar.png);
@@ -101,12 +106,12 @@ overflow-y:hidden;
 
 .logout 
 {
-    color : white;
+  color : white;
   text-align: center;
   float: right;
   margin-right: 1%;
-  margin-top: 1%;
-   width: 4.5%; 
+  margin-top: 2%;
+  width: 4.5%; 
   display: inline-block;
  }
 
@@ -167,10 +172,10 @@ overflow-y:hidden;
 .right_scroll_bar
  {
   position: fixed;
-  margin-top: 21%;
+  margin-top: 23%;
   margin-left: 85%;
   width: 15%;
-  height: 60vh;
+  height: 56vh;
   /*border: 1px solid black;*/
   overflow: scroll;
   /*background-color: #C3E4ED;*/
@@ -331,22 +336,8 @@ table.wide-table { width:50%; }
     color: white;
  }
 /*******************HOME SCREEN*************************************************************/
-/*.signup_login_button
-{
-  width: 200px;
-  height: 35px;
-  color: white;
-  background-color: #FF5930;
-  position: absolute;
-  text-decoration: bold;
-  border-radius: 10px;
-  float: right;
-}
-.signup_login_button:hover
-{
-  background-color: #E64016;
-}
-*/
+
+
 .content1
 {
   float: left;

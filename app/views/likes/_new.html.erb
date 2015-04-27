@@ -3,7 +3,6 @@
  
  <%= form_for :like , url: article_likes_path(@article) , :remote => "true" do |f| %>
          <%= f.hidden_field :user_id , :value => current_user.id , :readonly =>true %>
-          <%#= f.submit "Like" ,:remote => "true" , :class => "button like-btn" %>
 		  <% if user_like(current_user.id,@article.id).count == 0 %>
 		   <%= f.submit "Like", :class => "button" %>
 		 <% else %>

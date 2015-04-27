@@ -3,7 +3,6 @@ class ArticlesController < ApplicationController
   before_action :require_login 
  
 	def new    
-    #@user = User.where(:id => current_user.id)
   end
 
 	def create
@@ -11,16 +10,15 @@ class ArticlesController < ApplicationController
      @image = params[:article][:image]
     if @about != '' or @image != nil
       @article=current_user.articles.create(:title =>"Blank" , :about => @about.strip ,:date => Date.today , :image => params[:article][:image])
-       #render :json => @article
-      if @article.id != nil
+      if @article
        redirect_to root_path(current_user)
       else
        flash[:warning] = "Something wrong"
-       redirect_to root_path(current_user)
+       redirect_to :back
       end
     else
-      flash[:warning] = " provide required data"
-      redirect_to root_path(current_user)
+      flash[:warning] = "Post can't be blank"
+      redirect_to :back
     end
   end
 
@@ -28,6 +26,7 @@ class ArticlesController < ApplicationController
   def show
     @user=User.get_user(params[:user_id]) # get_user method is called from User model class, this is a class method this is called by class name
     @article = Article.get_article(params[:id])  # get_article method is called from Article model class, this is a class method this is called by class name
+    @comments = @article.comments
   end
 
   def edit 
@@ -46,8 +45,8 @@ class ArticlesController < ApplicationController
   end
 
   def index
-    @user=User.get_user(current_user.id)    
-    @article = Article.user_articles(current_user.id)
+    @user=User.find(params[:user_id])    
+    @article = Article.user_articles(@user.id)
   end
 
 

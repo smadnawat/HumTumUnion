@@ -1,5 +1,6 @@
 class CommentsController < ApplicationController
   before_action :require_login
+  
   def new
   end
   
@@ -9,7 +10,7 @@ class CommentsController < ApplicationController
     @comments = @article.comments
      respond_to do |format|
         format.js{ render "add_comment", :locals => {:article => @article , :comments => @comments} }
-      end
+     end
   end
 
   def destroy
@@ -19,7 +20,7 @@ class CommentsController < ApplicationController
     @comments = @article.comments
      respond_to do |format|
         format.js{ render "add_comment", :locals => {:article => @article , :comments => @comments} }
-      end
+     end
   end
 
    private

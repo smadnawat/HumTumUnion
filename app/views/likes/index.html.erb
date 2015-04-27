@@ -1,26 +1,13 @@
 
-<center>
-<h2>Likes</h1>
- 
-<table bordercolor=brown , border=1>
-  <tr >
-    <th> User Id </th>
-    <th> User Name </th>
-  </tr>
+
+<h3> These person likes this post</h3>
  
   <% @likes.each do |like| %>
-    <tr>
-      <td><%= like.user_id %></td>
-      <td><%= find_user(like.user_id).name %> </td>   
-    </tr>
+  
+      <%= find_user(like.user_id).name %> 
+      <%= link_to 'View profile' , profile_path(like.user_id),:class => "links" %>
+    <br>
   <% end %>
-</table>
 <br>
 
-
- 
-<br>
-<br>
 <%= link_to ' Back ', :back %><br>
-
- </center>

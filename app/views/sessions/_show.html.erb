@@ -26,7 +26,6 @@
 					 <%= link_to 'Reject' , reject_request_path(current_user.id,req),data: { confirm: 'you want to reject request ?' }%>
 					</td>
 					<td>
-					 <%= logger.info "************#{current_user.id}***********#{req.id}" %>
 					  <%= link_to 'Block',block_path(current_user.id,req),data: { confirm: 'Are you sure you want to block this person ?' }%>
 					</td>
 				</tr>

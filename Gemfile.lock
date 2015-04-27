@@ -111,6 +111,7 @@ GEM
     rake (10.4.2)
     rdoc (4.2.0)
       json (~> 1.4)
+    remotipart (1.2.1)
     responders (1.1.2)
       railties (>= 3.2, < 4.2)
     rest-client (1.6.7)
@@ -169,6 +170,7 @@ DEPENDENCIES
   quiet_assets
   rails (= 4.0.0)
   rails_12factor
+  remotipart (~> 1.2)
   sass-rails (~> 4.0.0)
   sdoc
   turbolinks

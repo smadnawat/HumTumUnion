@@ -1,0 +1,66 @@
+
+<div id="message"> 
+  <% if @all_old_messages.present? %><br>
+      <table style=" border-spacing:0 10px;">
+           <% @all_old_messages.each do |msg| %>
+              <tr>
+                  <% if msg.user_id == current_user.id %>
+                  <td></td>
+                    <td style="background-color:#aaaaaa;border-radius:20px 20px 0px 20px;color:white; padding:10px"> 
+                      <div class = "my_message" >
+                        <div class="comment_content">
+                            <font color="green"> &nbsp;You  </font>
+                             : <%= msg.content %> <br>
+                               <% if msg.image.present? %>
+                                    <center> <%= cl_image_tag( msg.image, :width => 170, :height => 200, :crop => :fill) %> </center>
+                               <% end %>
+                         
+                               <font size=2 color="black" %> sent at <%= msg.created_at.to_date %></font>
+                              
+                                  <%= link_to 'Remove', user_message_path(@reciever,msg),:remote=> true,:class => "links", method: :delete %>
+
+                             <% if msg.user_id == current_user.id %>
+                                   <% if msg.unread == "read" %>
+                                        <font size=3% color="#75675E"> Seen </font>
+                                    <% else %>
+                                          <font size=3% color="#75675E"> Not seen </font>
+                                    <% end %>
+                                <% end %>
+                                <br>
+                          </div>    
+                      </div>
+                    </td>
+                     <% else %>
+                        <td style="background-color:#cccccc;border-radius:0px 20px 20px 20px;color:#8B5A2B;padding:10px">
+                         <div class = "other_message" >
+                              <div class="comment_content">
+                                  <font color="blue">
+                                    <%= find_user( msg.user_id ).name %>
+                                  </font>
+                                     : <%= msg.content %> 
+
+                                      <% if msg.image.present? %>
+                                            <center> <%= cl_image_tag( msg.image, :width => 170, :height => 200, :crop => :fill) %> </center>
+                                     <% end %>
+                                    <br>
+                                     <font size=2% color="black"> sent at <%= msg.created_at.to_date %></font>
+                                     <% if msg.user_id == current_user.id %>
+                                         <% if msg.unread == "read" %>
+                                              <font size=3% color="#c4cfce"> Seen </font>
+                                          <% else %>
+                                                <font size=3% color="#c4cfce"> Not seen </font>
+                                          <% end %>
+                                      <% end %>
+                                     <br>
+                                </div>
+                          </div>
+                      </td><td></td>     
+               <% end %>
+            </tr>
+       <% end %>
+    </table>
+  <% else %>
+   <br><br>
+    <center> You have not any conversion with <%= find_user(@reciever.id).name %> yet.</center>
+  <%end%>
+</div>

@@ -1,32 +1,14 @@
 
-<center>
-<h1>Edit Event</h1>
- 
-<%= form_for :article, url: user_article_path(@user,@article), method: :patch do |f| %> 
- 
+<h1>Edit Post</h1> 
+<%= form_for :article, url: user_article_path(@user,@article), method: :patch do |f| %>  
  <p>
   <%= f.text_area :about,:align => 'center',:size => 20 ,:placeholder => "share with your friends Whats in your mind ?" %><br><br>
     <%= f.label :image ,"Upload image" %><br><br>
     <%= f.file_field :image %>
   </p>
   <p>
-    <%= f.submit  "Update Event" ,:class => "button" %>
+    <%= f.submit  "Update Post" ,:class => "button" %>
   </p>
  
 <% end %>
  
-
- </center>
-
-
-
-
-<script>
-
- $(document).ready(function(){
-    $('.datepicker').datepicker({format: 'yyyy-mm-dd' ,startDate: '+0d',
-        autoclose: true});
-  });
-</script>
-
-<!-- http://www.rubydoc.info/gems/bootstrap-datepicker-rails/0.3 -->

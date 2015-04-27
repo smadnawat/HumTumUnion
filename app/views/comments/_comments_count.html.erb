@@ -21,7 +21,7 @@
  <%= form_for :comment , url: add_comment_path(:article => article.id), :remote => "true" do |f| %>
                
            <%= f.hidden_field :Commenter , :value => current_user.id , :readonly =>true %>
-           <%= f.text_field :comment ,:size => 20, :placeholder => "Comment here" %><br>
+           <%= f.text_field :comment ,:size => 20, :placeholder => "Comment here",:id =>"comment_comment_#{article.id}" %><br>
         
            <%= f.submit "comment" ,:id =>"comment",:class => "button"  %>
  <% end %>

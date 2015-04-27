@@ -9,15 +9,6 @@ class SessionsController < ApplicationController
     @article = Article.where("user_id = ?",current_user.id)
   end
 
-  def usertitle
-    @user=User.get_user(params[:user_id])
-    @article = Article.get_article(params[:id])
-    @likes = Like.article_total_likes(@article.id)
-    @Current_like = Like.user_like(current_user.id,@article.id)
-    @Current_total_like =@Current_like.count
-    @comments = Comment.article_comments(@article.id)
-  end
-
   def show
      @request = Friendship.where("friend_id=? and accept = ? and block = ? ",current_user.id,"false","false")   
   end
@@ -30,23 +21,39 @@ class SessionsController < ApplicationController
 
   def find_friend
     @user = User.find(params[:id])
-    @find_friends = User.all_friends(@user.id,"notfrields")
+    @user_ids = User.where("id != ?",@user.id).pluck(:id)
+    @request = Friendship.where("user_id = ? or friend_id = ?",@user.id,@user.id) 
+    @friend_users = Array.new
+    temp = 0
+    @request.each do |request|
+      if request.user_id == @user.id
+        @friend_users[temp] = request.friend_id
+      else
+        @friend_users[temp] = request.user_id
+      end
+      temp += 1
+    end
+    @are_not_friends_ids = @user_ids.reject{ |e| @friend_users.include? e }
+    @find_friends = User.where("id IN (?)",@are_not_friends_ids)
   end
-
 
   def search_people
     @users = User.where('name LIKE ?', "%#{params[:search_users][:users]}%")
   end
 
-
-
   def send_request
     @user = User.find(params[:id])
-    @send = @user.friendships.create(:friend_id => params[:friend_id],:block=>"false",:accept=>"false")
-    if @send
-      redirect_to find_friend_path(@user), :notice => "request sent"
+    @friend = User.find(params[:friend_id])
+    @requests = current_user.friendships.pluck(:friend_id)
+    if  @requests.include?(@friend.id)
+        redirect_to find_friend_path(@user), :notice => "request already sent"
     else
-      redirect_to find_friend_path(@user), :notice => "request can not send"
+        @send = @user.friendships.create(:friend_id => params[:friend_id],:block=>"false",:accept=>"false")
+        if @send
+         redirect_to find_friend_path(@user), :notice => "request sent"
+        else
+         redirect_to find_friend_path(@user), :notice => "request can not send"
+        end
     end
   end
 
@@ -81,9 +88,9 @@ class SessionsController < ApplicationController
     @user = User.find(params[:id])
     @request =Friendship.find(params[:request_id])
     if @request.destroy
-      redirect_to session_path(@user), :notice => "you have rejected the request from #{@request.user.name}"
+      redirect_to sent_request_path, :notice => "you have rejected the request"
     else
-      redirect_to session_path(@user), :notice => "something wrong"
+      redirect_to sent_request_path, :notice => "something wrong"
     end
   end
 
@@ -126,9 +133,5 @@ class SessionsController < ApplicationController
     @user = User.find(params[:id])
     @blocked_request = Friendship.where("blocked_by = ?",@user.id)
   end
-
-
-
-
  
 end

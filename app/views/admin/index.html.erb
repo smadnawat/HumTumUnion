@@ -1,32 +1,33 @@
 
 <center>
-<h3>List of all users </h3>
+<h3>List of all users ( <%= @users.count %> )</h3>
  
 <table bordercolor=brown border=1 class="wide-table">
   <tr >
-    <th> User Id</th>
+   <!--  <th> User Id</th> -->
     <th> Name </th>
     <th> E-Mail </th>
-    <th> Status </th>
+    <th> View Profile </th>
+    <th> Posts </th>
     <th> Delete </th>
    
   </tr>
  
   <% @users.each do |user| %>
     <tr>
-      <td><%= user.id %></td>
+      <!-- <td><%#= user.id %></td> -->
       <td><%= user.name %></td>
       <td><%= user.email %> </td>
-      <% if user.confirmed_at.nil? %>
-      <td><font color="red"> Not Confermed yet </font></td>
-      <%else%>
-      <td><font color="green"> Confermed </font></td>
-      <%end%>
-      <td><%= link_to ' Delete ' , deleteuser_path(current_user,user), method: :delete %></td>
+      <%# if user.confirmed_at.nil? %>
+      <!-- <td><font color="red"> Not Confermed yet </font></td> -->
+      <%#else%>
+      <!-- <td><font color="green"> Confermed </font></td> -->
+      <%#end%>
+      <td><%= link_to 'View' , profile_path(user),:class => "links" %></td>
+      <td><%= link_to 'Posts',user_articles_path(user),:class => "links" %> </td>
+      <td><%= link_to 'Delete' , deleteuser_path(current_user,user), method: :delete,:class => "links" %></td>
       
     </tr>
   <% end %>
 </table>
-<br>
-<br>
-<%= link_to 'home' , root_path(@user) %>
+
