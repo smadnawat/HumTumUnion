@@ -1,3 +1,3 @@
 class Dating < ActiveRecord::Base
-	 belongs_to :user,:class_name => 'User',:foreign_key => 'datable'
+	 belongs_to :user,:class_name => 'User',:foreign_key => 'datable_id'
 end

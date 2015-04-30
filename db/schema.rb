@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150420050905) do
+ActiveRecord::Schema.define(version: 20150427121457) do
 
   create_table "articles", force: true do |t|
     t.string   "title"
@@ -86,6 +86,22 @@ ActiveRecord::Schema.define(version: 20150420050905) do
 
   add_index "messages", ["group_id"], name: "index_messages_on_group_id", using: :btree
   add_index "messages", ["user_id"], name: "index_messages_on_user_id", using: :btree
+
+  create_table "notifications", force: true do |t|
+    t.integer  "notificable_id"
+    t.string   "notificable_type"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.boolean  "pending"
+    t.integer  "receiver"
+    t.text     "message"
+    t.integer  "article_id"
+  end
+
+  add_index "notifications", ["article_id"], name: "index_notifications_on_article_id", using: :btree
+  add_index "notifications", ["notificable_id", "notificable_type"], name: "index_notifications_on_notificable_id_and_notificable_type", using: :btree
+  add_index "notifications", ["user_id"], name: "index_notifications_on_user_id", using: :btree
 
   create_table "profiles", force: true do |t|
     t.string   "contact"

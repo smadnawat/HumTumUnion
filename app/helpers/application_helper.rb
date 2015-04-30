@@ -29,7 +29,12 @@ module ApplicationHelper
   end
 
   def current_user_new_message
-    Message.where("(reciever = ? and unread = ?) or ( user_id != ? and unread = ? and group_id != ?)",current_user.id,"unread",current_user.id,"unread",0)
+    current_user_groups = current_user.groups
+    Message.where("(reciever = ? and unread = ?) or ( user_id != ? and unread = ? and group_id IN (?))",current_user.id,"unread",current_user.id,"unread",current_user_groups)
+  end
+
+  def current_user_new_notification
+    new_notification = Notification.where("receiver = ? and user_id != ? and pending =  ?",current_user.id,current_user.id,true)
   end
 
   def article_total_likes article

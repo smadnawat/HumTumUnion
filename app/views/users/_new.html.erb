@@ -9,6 +9,7 @@
                       <%= cl_image_tag( article.image, :width => 200, :height => 240, :crop => :fill) %>
                   <% end %>
            </center><br>
+           <font color= grey> <%= time_ago_in_words(article.created_at, include_seconds: true) %> ago </font><br>
            <div id="likes_<%=article.id%>">
                <%= render :partial => 'likes/like_count', :locals=> {:articlee => article}%>
            </div>  <br>

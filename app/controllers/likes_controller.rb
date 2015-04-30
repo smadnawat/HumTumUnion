@@ -22,12 +22,17 @@ class LikesController < ApplicationController
   def like_it
       @article = Article.get_article(params[:article_id])
 
-       @users = Like.user_like(current_user.id,@article.id)
-          @total =@users.count
+       @like = Like.user_like(current_user.id,@article.id)
+        @total =@like.count
         #  p "*********************#{@total}*********"
           if @total==0
-           @likes = @article.likes.create(:user_id => current_user.id) 
+           @likes = @article.likes.create(:user_id => current_user.id)
+           # @user = @likes.notifications.user.name
+           # p "*************************#{@user}*****************************"
           else
+            @current_like = @like.first
+           @notification = @current_like.notifications
+           @notification.each{ |n| n.destroy }
            Like.delete_user_like(current_user,@article.id) 
           end
 

@@ -9,15 +9,16 @@ class User < ActiveRecord::Base
 
   after_save :build_profile
   
-  has_many :friendships, dependent: :destroy
-  has_many :articles , dependent: :destroy
-	has_many :comments , through: :articles
-	has_many :likes , through: :articles
+  has_many :friendships,dependent: :destroy
+  has_many :articles ,dependent: :destroy
+	has_many :likes, dependent: :destroy
+  has_many :comments, :class_name => 'Comment',:foreign_key => 'Commenter',dependent: :destroy
+  has_many :notifications,dependent: :destroy
   has_one  :profile, dependent: :destroy
-  has_and_belongs_to_many :groups ,:join_table => "users_groups"
+  has_and_belongs_to_many :groups , :join_table => "users_groups" 
   has_many :messages , dependent: :destroy
-  has_many :comments,:class_name => 'Comment',:foreign_key => 'Commenter'
-   has_many :dates,:class_name => 'Dating',:foreign_key => 'datable'
+  has_many :dates,:class_name => 'Dating',:foreign_key => 'datable_id' ,dependent: :destroy
+ 
 	validates_uniqueness_of :email
   validates :name, :presence => true
   validates_presence_of :gender
@@ -68,7 +69,11 @@ class User < ActiveRecord::Base
    def self.all_friends user,friendOrNotfriend
     @user = User.find(user)
     @user_ids = User.where("id != ?",@user.id).pluck(:id)
-    @request = Friendship.where("(user_id = ? or friend_id = ?) and accept = ?",@user.id,@user.id,"true") 
+    if friendOrNotfriend == "allrequests"
+       @request =  Friendship.where("user_id = ? or friend_id = ?",@user.id,@user.id)
+    else
+       @request = Friendship.where("(user_id = ? or friend_id = ?) and accept = ?",@user.id,@user.id,"true")
+    end
     @friend_users = Array.new
     temp = 0
     @request.each do |request|

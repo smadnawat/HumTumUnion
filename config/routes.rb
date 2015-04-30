@@ -61,6 +61,9 @@ Signup::Application.routes.draw do
   get "new_group_message/:sender/group/:id" => 'messages#new_group_message',:as => 'new_group_message'
   post'group_message/:sender/group/:id' => 'messages#group_message',:as =>'group_message' 
   post 'search_people' => 'sessions#search_people',:as => 'search_people'
- 
+# Notifications
+  get 'list_notifications/:id' => 'notification#list_notifications',:as => 'notification'
+  get 'show_notifications/:user_id/noti/:noti_id/post/:id' => 'notification#show_notifications', :as => 'show_notification'
+  delete 'destroy_notification/:user_id/noti/:id' => 'notification#destroy',:as => 'destroy_notification'
  
 end

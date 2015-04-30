@@ -1,0 +1,29 @@
+
+<center>
+<h3>Notifications</h3>
+    Notifications
+	<table bordercolor=brown border=1 >
+	  <% if @notifications.present? %>
+		  <% @notifications.each do |noti| %>
+		    <tr>
+		      <td><b> <%=link_to "#{noti.message}" ,show_notification_path(@user,noti.id,noti.article.id),:class => "links" %></b></td>
+		      <td><b><font size=2 color="black" %> <%=time_ago_in_words(noti.created_at, include_seconds: true) %> ago</font></b></td>
+		      <td><b><%= link_to 'Delete' ,destroy_notification_path(@user,noti), method: :delete,:class => "links" %></b></td>
+		      <td> <font color = red >New </font> </td>
+		    </tr>
+		  <% end %>
+	  <% end %>
+	   <% if @old_notifications.present? %>
+		  <% @old_notifications.each do |noti| %>
+		    <tr>
+		      <td><%=link_to "#{noti.message}" ,show_notification_path(@user,noti.id,noti.article.id),:class => "links" %></td>
+		      <td><font size=2 color="black" %> <%=time_ago_in_words(noti.created_at, include_seconds: true) %> ago</font></td>
+		      <td><%= link_to 'Delete' , destroy_notification_path(@user,noti), method: :delete,:class => "links" %></td>
+		      <td>........</td>
+		    </tr>
+		  <% end %>
+	  <% end %>
+	</table>
+
+ 
+

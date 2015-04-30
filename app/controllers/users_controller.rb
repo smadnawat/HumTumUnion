@@ -1,12 +1,21 @@
 class UsersController < ApplicationController
  before_action :require_login  , only:  [:setting ,:update_password]
+
   def new
   	if current_user.present?
-      @request = Friendship.where("friend_id=? and accept = ? and block = ? ",current_user.id,"false","false")
-      @friends = User.all_friends(current_user.id,"friends").pluck(:id) 	
-      #@article = Article.order('created_at desc') 
-     @article = Article.where("user_id IN (?)",@friends ).order('created_at desc') 
-     @people_you_may_know = User.all_friends(current_user.id,"friends")
+      @requests = Friendship.where("(user_id = ? or friend_id = ?) and accept = ? and block =?",current_user.id,current_user.id, "true","false") 
+      @friend_users = Array.new
+      temp = 0
+      @requests.each do |request|
+      if request.user_id == current_user.id
+        @friend_users[temp] = request.friend_id
+      else
+        @friend_users[temp] = request.user_id
+      end
+      temp += 1
+    end
+    @friend_users[@friend_users.length] = current_user.id
+     @article = Article.where("user_id IN (?)",@friend_users).order('created_at desc') 
     end
   end
 

@@ -46,16 +46,21 @@ class ArticlesController < ApplicationController
 
   def index
     @user=User.find(params[:user_id])    
-    @article = Article.user_articles(@user.id)
+    @article = Article.user_articles(@user.id).order('created_at desc')
   end
 
 
   def destroy
    @article = Article.get_article(params[:id])
-   @article.comments.each{|c| c.destroy}
-   @article.likes.each{|l| l.destroy}
-   @article.destroy
-    redirect_to user_articles_path
+   # @article.notifications.each{|n| n.destroy}
+   # @article.comments.each{|c| c.destroy}
+   # @article.likes.each{|l| l.destroy}
+   if @article.present?
+       @article.destroy
+    end
+
+  
+   redirect_to user_articles_path
   
   end
 

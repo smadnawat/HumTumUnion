@@ -4,7 +4,7 @@
 
 <%= f.select(:date_id, options_for_select(current_user_friends.collect{|o| [find_friend(o)[:name],find_friend(o)[:id]]}), {:prompt => "Select person for date"})%>
   
-  <%= f.text_field :datingtime,:size => '20%',:readonly => 'true' ,:class =>'datepicker',:placeholder =>'Select Date' %></td>
+<%= f.text_field :datingtime,:size => '20%',:readonly => 'true' ,:class =>'datepicker',:placeholder =>'Select Date' %></td>
      
 		
 <%= f.submit "Invite for date", :class => "button" %>

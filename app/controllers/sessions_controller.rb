@@ -76,11 +76,12 @@ class SessionsController < ApplicationController
     @user = User.find(params[:id])
     request = Friendship.where("friend_id=? and accept = ? and block = ? ",@user.id,"false","false")
     date_request =  Dating.where("date_id = ? AND accept = ?",current_user.id,false)
-    new_message =  Message.where("(reciever = ? and unread = ?) or ( user_id != ? and unread = ? and group_id != ?)",current_user.id,"unread",current_user.id,"unread",0)
-
+     current_user_groups = current_user.groups   
+    new_message =  Message.where("(reciever = ? and unread = ?) or ( user_id != ? and unread = ? and group_id IN (?))",current_user.id,"unread",current_user.id,"unread",current_user_groups)
+    new_notification = Notification.where("receiver = ? and user_id != ? and pending =  ?",current_user.id,current_user.id,true)
 
     respond_to do |format|
-     format.js{ render "count_request", :locals => {:request => request , :date_request => date_request, :new_message => new_message} }
+     format.js{ render "count_request", :locals => {:request => request , :date_request => date_request, :new_message => new_message,:new_notification => new_notification} }
     end
   end
 

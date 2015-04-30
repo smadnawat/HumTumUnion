@@ -1,0 +1,16 @@
+<div style ="width:100%; background:#F0FFFF" >
+        <font color="green"><b><%= @article.user.name %></b></font><br><br>
+           <div class="comment_content"> <%= @article.about %></div><br>
+           <center>
+                 <% if @article.image.present? %>
+                      <%= cl_image_tag( @article.image, :width => 200, :height => 240, :crop => :fill) %>
+                  <% end %>
+           </center><br>
+           <div id="likes_<%=@article.id%>">
+               <%= render :partial => 'likes/like_count', :locals=> {:articlee => @article}%>
+           </div>  <br>
+          <div id = "comments_<%= @article.id %>">
+                <%= render :partial => 'comments/comments_count', :locals=> {:article => @article ,:comments => @article.comments}%>
+           </div>
+            <br>
+ </div>

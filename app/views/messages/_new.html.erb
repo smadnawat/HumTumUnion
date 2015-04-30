@@ -14,9 +14,10 @@
                                <% if msg.image.present? %>
                                     <center> <%= cl_image_tag( msg.image, :width => 170, :height => 200, :crop => :fill) %> </center>
                                <% end %>
+
                          
-                               <font size=2 color="black" %> sent at <%= msg.created_at.to_date %></font>
-                              
+                               <font size=2 color="black" %> <%= time_ago_in_words(msg.created_at, include_seconds: true) %> ago</font>
+                              <br>
                                   <%= link_to 'Remove', user_message_path(@reciever,msg),:remote=> true,:class => "links", method: :delete %>
 
                              <% if msg.user_id == current_user.id %>
@@ -43,7 +44,7 @@
                                             <center> <%= cl_image_tag( msg.image, :width => 170, :height => 200, :crop => :fill) %> </center>
                                      <% end %>
                                     <br>
-                                     <font size=2% color="black"> sent at <%= msg.created_at.to_date %></font>
+                                     <font size=2% color="black"><%= time_ago_in_words(msg.created_at, include_seconds: true) %> ago</font>
                                      <% if msg.user_id == current_user.id %>
                                          <% if msg.unread == "read" %>
                                               <font size=3% color="#c4cfce"> Seen </font>

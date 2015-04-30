@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  notificable_id: 
+  notificable_type: Notificable
+  user_id: 
+
+two:
+  notificable_id: 
+  notificable_type: Notificable
+  user_id: 

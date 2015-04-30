@@ -23,12 +23,21 @@ class AdminController < ApplicationController
   def destroy
    @user = User.get_user(params[:user_id])
    @deleteuser = User.get_user(params[:id])
-   @deleteuser.comments.each{ |c| c.destroy }
-   @deleteuser.likes.each{ |l| l.destroy }
-   @deleteuser.articles.each{ |a| a.destroy }
-   @deleteuser.groups.each{|g| g.destroy }
-   @deleteuser.messages.each { |m| m.destroy }
-   @deleteuser.destroy
+   # @deleteuser.comments.each{ |c| c.destroy }
+   # @deleteuser.notifications.each{ |n| n.destroy }
+   # @deleteuser.likes.each{ |l| l.destroy }
+   # @deleteuser.articles.each{ |a| a.destroy }
+   # @deleteuser.groups.each{|g| g.destroy }
+   # @deleteuser.messages.each { |m| m.destroy }
+      @request = Friendship.where("user_id = ? or friend_id = ?",@deleteuser.id,@deleteuser.id) 
+      @friends = User.all_friends(@deleteuser.id,"allrequests")
+      @friends.each do |f|
+        @friends_messages= f.messages.where("reciever = ? ",@deleteuser.id)
+        @friends_messages.destroy_all
+      end
+      @deleteuser.groups.destroy_all
+      @request.destroy_all
+      @deleteuser.destroy
    
    #@article.comments.each{|c| c.destroy}
    #@article.likes.each{|l| l.destroy}
